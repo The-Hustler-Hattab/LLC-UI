@@ -1,0 +1,30 @@
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <h2 class="text-center">Upload PDF Receipts</h2>
+        <form (submit)="onSubmit()">
+          <div class="form-group">
+            <label for="companyName">Company Name:</label>
+            <select class="form-control" id="companyName" [(ngModel)]="selectedCompanyName">
+              <option value="Company A">Hattab LLC</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="customerName">Customer Name:</label>
+            <select class="form-control" id="customerName" [(ngModel)]="selectedCustomerName">
+              <option value="Customer X">Mohammed Hattab</option>
+              <option value="Customer Y">Haider Hattab</option>
+              <option value="Customer Z">Ahmed Mushatet</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="pdfFile">Select PDF files:</label>
+            <input type="file" class="form-control-file" id="pdfFile" accept=".pdf" multiple (change)="onFilesSelected($event)">
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary" [disabled]="!selectedFiles || selectedFiles.length === 0">Upload</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

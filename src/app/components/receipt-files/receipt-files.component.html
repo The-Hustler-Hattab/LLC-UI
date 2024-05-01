@@ -1,1 +1,108 @@
-<p>receipt-files works!</p>
+<div class="container">
+  <div class="d-flex justify-content-center">
+    <button class="btn btn-warning" (click)="refresh()">
+      <i class="fas fa-sync-alt"></i> Refresh
+    </button>
+  </div>
+
+  <div class="card">
+    <p-treeTable
+      #tt
+      [value]="files"
+      [columns]="cols"
+      [scrollable]="true"
+      [tableStyle]="{'min-width':'50rem'}" 
+      styleClass="p-treetable-gridlines"
+      [resizableColumns]="true"
+ 
+    >
+      <ng-template pTemplate="caption">
+        <div class="flex justify-content-center align-items-center">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="pi pi-search"></i></span>
+            </div>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Search"
+              (input)="tt.filterGlobal($any($event.target).value, 'contains')"
+            />
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="colgroup" let-columns>
+        <colgroup>
+            <col *ngFor="let col of columns">
+            <col>
+        </colgroup>
+    </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr >
+          <th *ngFor="let col of cols" ttResizableColumn>
+            {{ col.header }}
+          </th>
+          <th ttResizableColumn>Operations</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
+        <tr [ttRow]="rowNode"  style="border: 1px solid black;">
+          <td *ngFor="let col of cols; let i = index">
+            <p-treeTableToggler
+              [rowNode]="rowNode"
+              *ngIf="i === 0"
+            ></p-treeTableToggler>
+            {{ rowData[col.field] }}
+          </td>
+          <td>
+            <div class="row">
+              <div class="col-sm-2 text-center">
+                <button
+                  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded"
+                  (click)="downloadFile(rowData)"
+                  *ngIf="isFile(rowData)"
+                >
+                <i class="fas fa-download"></i>
+
+                </button>
+              </div>
+
+              <div class="col-sm-2 text-center">
+                <button
+                  class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-3 rounded"
+                  (click)="deleteFile(rowData)"
+                  *ngIf="isFile(rowData)"
+                >
+                <i class="fas fa-trash-alt"></i>
+
+                </button>
+                
+              </div>
+              <div class="col-sm-2 text-center">
+                <button
+                  class="bg-green-500 hover:bg-green-500 text-white font-bold py-2 px-3 rounded"
+                  (click)="displayFile(rowData)"
+                  *ngIf="isFile(rowData)"
+                >
+                <i class="fas fa-eye"></i>
+
+                </button>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td [attr.colspan]="cols.length">No data found.</td>
+        </tr>
+      </ng-template>
+    </p-treeTable>
+  </div>
+
+  <app-result-box
+    [isSuccessful]="isSubmissionSuccessful"
+    [message]="submitStatus"
+    (closed)="clearSubmitStatus()"
+  ></app-result-box>
+</div>
