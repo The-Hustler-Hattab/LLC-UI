@@ -93,6 +93,8 @@ import { TerminalModule } from 'primeng/terminal';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { TimelineModule } from 'primeng/timeline';
 import { ToastModule } from 'primeng/toast';
+import { ConfirmationService, MessageService } from 'primeng/api';
+
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { ToolbarModule } from 'primeng/toolbar';
 import { TooltipModule } from 'primeng/tooltip';
@@ -114,9 +116,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { ResultBoxComponent } from './components/result-box/result-box.component';
 import { RecieptsUploadComponent } from './components/reciepts-upload/reciepts-upload.component';
 import { ProjectInterceptor } from './interceptor/project.interceptor';
+import { RecieptsTableComponent } from './components/reciepts-table/reciepts-table.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatButtonModule } from '@angular/material/button';
 
-
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatListModule} from '@angular/material/list';
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
   declarations: [
     AppComponent,
@@ -127,7 +134,8 @@ import { ProjectInterceptor } from './interceptor/project.interceptor';
     LoadingSpinnerComponent,
     ReceiptFilesComponent,
     ResultBoxComponent,
-    RecieptsUploadComponent
+    RecieptsUploadComponent,
+    RecieptsTableComponent 
 
   ],
   imports: [
@@ -236,11 +244,20 @@ import { ProjectInterceptor } from './interceptor/project.interceptor';
     RippleModule,
     StyleClassModule,
     MatFormFieldModule,
-    MatIconModule
+    MatIconModule,
+    MatButtonModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatListModule,
+    MatInputModule,
+    
     
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: ProjectInterceptor, multi: true }
+    ConfirmationService, 
+    MessageService, 
+    { provide: HTTP_INTERCEPTORS, useClass: ProjectInterceptor, multi: true },
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent],
   // schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

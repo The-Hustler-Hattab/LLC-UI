@@ -14,6 +14,7 @@ export const ApiConstants = {
   // RECEIPT CONTROLLER
   GET_LIST_OF_RECEIPTS: '/get-list-of-receipts',
   POST_PROCESS_RECIPTS: '/process-receipts', // ADD '/{company_name}/{customer_name}'
+  DELETE_BY_ID: '/delete-by-id',
 
   // HEALTH CONTROLLER
   GET_HEALTH: '/health',
@@ -74,14 +75,13 @@ export class ReceiptService {
    * Retrieves a list of receipts from the Receipt controller.
    * @returns An observable of Reciept[], representing the list of receipts.
    */
-  getListOfReceipts(): Observable<Reciept[]> {
+  getListOfReceipts(): Observable<{ receipts: Reciept[], msg: string }> {
     const url = `${this.apiUrl}${ApiConstants.GET_LIST_OF_RECEIPTS}`;
 
     console.log(url);
 
     return this.http
-      .get<{ files: Reciept[] }>(url)
-      .pipe(map((response) => response.files));
+      .get<{ receipts: Reciept[], msg: string }>(url);
   }
 
   /**
@@ -94,6 +94,17 @@ export class ReceiptService {
     return this.http.delete<{ message: string }>(url);
 
   }
+
+    /**
+   * Deletes a row from the the table.
+   * @param id The id of the row to delete.
+   * @returns An observable representing the result of the deletion.
+   */
+    deleteById(id: number): Observable<{ message: string }> {
+      const url = `${this.apiUrl}${ApiConstants.DELETE_BY_ID}?id=${id}`;
+      return this.http.delete<{ message: string }>(url);
+  
+    }
 
 
 }

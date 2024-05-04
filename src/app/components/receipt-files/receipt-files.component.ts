@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone, Renderer2 } from '@angular/core';
 import { TreeNode } from 'primeng/api';
 import { ReceiptService } from 'src/app/services/receipt.service';
 import { MatIconRegistry } from '@angular/material/icon';
@@ -16,11 +16,14 @@ export interface Column {
   styleUrls: ['./receipt-files.component.scss'],
 })
 export class ReceiptFilesComponent {
+
   filterMode = 'lenient';
 
   files!: TreeNode[];
 
   cols!: Column[];
+
+  expandAllState = false;
 
   isSubmissionSuccessful: boolean = null;
   submitStatus: string = null;
@@ -30,7 +33,9 @@ export class ReceiptFilesComponent {
     private recieptService: ReceiptService,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
-    private filesService: FilesService
+    private filesService: FilesService,
+    private cdr: ChangeDetectorRef,
+    private renderer: Renderer2
   ) {
     this.matIconRegistry.addSvgIcon(
       'filter',
@@ -89,5 +94,19 @@ export class ReceiptFilesComponent {
   refresh() {
     this.filesService.getFiles();
   }
+  expandAll() {
+    this.expandAllState = !this.expandAllState;
+    this.expandRecursive(this.files, this.expandAllState);
+  }
+  expandRecursive(nodes: TreeNode[], isExpand: boolean) {
+    if (nodes) {
+      nodes.forEach(node => {
+        node.expanded = isExpand;
+        this.expandRecursive(node.children, isExpand);
+      });
+    }
+    
+  }
+  
 
 }
