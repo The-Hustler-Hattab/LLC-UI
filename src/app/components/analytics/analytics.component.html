@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand-md">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <a class="navbar-brand" (click)="loadComponent('bar-chart')">Bar Chart</a>
+        </div>
+        <div class="col">
+          <a class="navbar-brand" (click)="loadComponent('pie-chart')">Pie Chart</a>
+        </div>
+        <div class="col">
+            <a class="navbar-brand" (click)="loadComponent('line-chart')">Line Chart</a>
+        </div>
+        <div class="col">
+            <a class="navbar-brand" (click)="loadComponent('horizontal-chart')">Horizontal Chart</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+<div class="col" #dynamicComponentContainer></div>

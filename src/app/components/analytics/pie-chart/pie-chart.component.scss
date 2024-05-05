@@ -1,0 +1,19 @@
+.card {
+    /* Add your card styles here */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 10px;
+}
+
+
+
+
+.custom-chart {
+    /* Ensure the chart fills its container */
+    width: 50%;
+    /* Set a maximum width to maintain readability on larger screens */
+    max-width: 50%;
+    /* Allow the height to adjust according to the width */
+    height: auto;
+}

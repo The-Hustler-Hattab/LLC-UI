@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-2">
+        <button mat-fab extended color="primary" id="" (click)="refresh()">
+          <i class="fas fa-sync-alt"></i> Refresh
+        </button>
+      </div>
+  
+      <div class="col-md-2">
+        <div class="card flex justify-content-center">
+          <p-floatLabel>
+            <p-calendar
+              [(ngModel)]="rangeDates"
+              selectionMode="range"
+              [numberOfMonths]="2"
+              inputId="Date"
+            />
+            <label for="Date">Date</label>
+          </p-floatLabel>
+        </div>
+      </div>
+    </div>
+  <hr />
+  <div class="container">
+      <div class="card">
+          <p-chart type="bar" [data]="data" [options]="options" />
+      </div>
+  </div>
+  
+  
+  </div>
+  
+  

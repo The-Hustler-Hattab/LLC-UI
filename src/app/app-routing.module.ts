@@ -6,6 +6,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { ReceiptFilesComponent } from './components/receipt-files/receipt-files.component';
 import { RecieptsUploadComponent } from './components/reciepts-upload/reciepts-upload.component';
 import { RecieptsTableComponent } from './components/reciepts-table/reciepts-table.component';
+import { AnalyticsComponent } from './components/analytics/analytics.component';
+import { ContactComponent } from './components/contact/contact.component';
 
 const routes: Routes = [
   {path:"home", component: HomeComponent},
@@ -14,6 +16,8 @@ const routes: Routes = [
   {path:"reciepts", component: ReceiptFilesComponent},
   {path:"reciepts-table", component: RecieptsTableComponent},
   {path:"reciepts-upload", component: RecieptsUploadComponent},
+  {path:"analytics", component: AnalyticsComponent},
+  {path:"contact", component: ContactComponent},
 
 
   {path: 'page-not-found', component: PageNotFoundComponent},

@@ -94,6 +94,7 @@ import { TieredMenuModule } from 'primeng/tieredmenu';
 import { TimelineModule } from 'primeng/timeline';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { FloatLabelModule } from 'primeng/floatlabel';
 
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { ToolbarModule } from 'primeng/toolbar';
@@ -124,6 +125,12 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatListModule} from '@angular/material/list';
 import { MatInputModule } from '@angular/material/input';
+import { AnalyticsComponent } from './components/analytics/analytics.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { BarChartComponent } from './components/analytics/bar-chart/bar-chart.component';
+import { PieChartComponent } from './components/analytics/pie-chart/pie-chart.component';
+import { LineChartComponent } from './components/analytics/line-chart/line-chart.component';
+import { HorizontalChartComponent } from './components/analytics/horizontal-chart/horizontal-chart.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -135,8 +142,13 @@ import { MatInputModule } from '@angular/material/input';
     ReceiptFilesComponent,
     ResultBoxComponent,
     RecieptsUploadComponent,
-    RecieptsTableComponent 
-
+    RecieptsTableComponent,
+    AnalyticsComponent,
+    ContactComponent,
+    BarChartComponent,
+    PieChartComponent,
+    LineChartComponent,
+    HorizontalChartComponent
   ],
   imports: [
     BrowserModule,
@@ -250,7 +262,7 @@ import { MatInputModule } from '@angular/material/input';
     MatDatepickerModule,
     MatListModule,
     MatInputModule,
-    
+    FloatLabelModule
     
   ],
   providers: [
