@@ -4,6 +4,7 @@ import { Observable, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Reciept } from '../models/reciept.model';
 import { TreeNode } from '../models/treeNode.model';
+import { BarChartModel } from '../models/bar.chart.model';
 
 export const ApiConstants = {
   // BLOB CONTROLLER
@@ -15,6 +16,9 @@ export const ApiConstants = {
   GET_LIST_OF_RECEIPTS: '/get-list-of-receipts',
   POST_PROCESS_RECIPTS: '/process-receipts', // ADD '/{company_name}/{customer_name}'
   DELETE_BY_ID: '/delete-by-id',
+
+  // ANALYTICS CONTROLLER
+  GET_BAR_CHART_DATA: '/get-bar-chart-data',
 
   // HEALTH CONTROLLER
   GET_HEALTH: '/health',
@@ -104,6 +108,11 @@ export class ReceiptService {
       const url = `${this.apiUrl}${ApiConstants.DELETE_BY_ID}?id=${id}`;
       return this.http.delete<{ message: string }>(url);
   
+    }
+
+    getBarChartData(start_date, end_date): Observable<{message: string, data_all: BarChartModel}> {
+      const url = `${this.apiUrl}${ApiConstants.GET_BAR_CHART_DATA}?start_date=${start_date}&end_date=${end_date}`;
+      return this.http.get<{message: string, data_all: BarChartModel}>(url);
     }
 
 

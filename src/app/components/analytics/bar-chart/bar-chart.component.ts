@@ -1,87 +1,67 @@
 import { Component, OnInit } from '@angular/core';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { FormsModule } from '@angular/forms';
+import { BarService } from 'src/app/services/charts/bar.service';
+import { DatePipe } from '@angular/common';
+import { UtilsService } from 'src/app/services/utils.service';
 
+interface AutoCompleteCompleteEvent {
+  originalEvent: Event;
+  query: string;
+}
 @Component({
   selector: 'app-bar-chart',
   templateUrl: './bar-chart.component.html',
   styleUrl: './bar-chart.component.scss'
 })
 export class BarChartComponent implements OnInit {
+
   rangeDates: Date[] | undefined;
 
   data: any;
 
   options: any;
+  constructor(private barChartService: BarService, private datePipe: DatePipe) {}
 
-  refresh() {}
+  onDateRangeSelect($event: Date) {
+    console.log($event);
+    console.log(this.rangeDates);
+    if (this.rangeDates!=undefined && this.rangeDates.length == 2) {
+      let endDate = this.rangeDates[1]; // Second date in the range
+      endDate = this.getLastDayOfMonth(endDate); // Convert to last day of the month
+      
+      const start_time = this.datePipe.transform(this.rangeDates[0], 'yyyy-MM-dd') || '';
+      const formattedEndDate = this.formatDate(endDate);
+      this.barChartService.getBarData(start_time, formattedEndDate);
+
+    }
+
+  }
+  formatDate(date: Date): string {
+    return this.datePipe.transform(date, 'yyyy-MM-dd') || '';
+  }
+  getLastDayOfMonth(date: Date): Date {
+    return new Date(date.getFullYear(), date.getMonth() + 1, 0);
+  }
+
+
+  refresh() {
+    this.barChartService.getDefaultBarData();
+
+  }
+
+
 
   ngOnInit() {
-    const documentStyle = getComputedStyle(document.documentElement);
-    const textColor = documentStyle.getPropertyValue('--text-color');
-    const textColorSecondary = documentStyle.getPropertyValue(
-      '--text-color-secondary'
-    );
-    const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
+    this.options = this.barChartService.options;
+    this.data = this.barChartService.data;
 
-    this.data = {
-      labels: ['January $5486', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-      datasets: [
-        {
-          type: 'bar',
-          label: 'Home Depot',
-          backgroundColor: documentStyle.getPropertyValue('--blue-500'),
-          data: [50, 25, 12, 48, 90, 76, 42.5],
-        },
-        {
-          type: 'bar',
-          label: 'Lowes',
-          backgroundColor: documentStyle.getPropertyValue('--green-500'),
-          data: [21, 84, 24, 75, 37, 65, 34],
-        },
-        {
-          type: 'bar',
-          label: 'Walmart',
-          backgroundColor: documentStyle.getPropertyValue('--yellow-500'),
-          data: [41, 52, 24, 74, 23, 21, 32],
-        },
-      ],
-    };
-
-    this.options = {
-      maintainAspectRatio: false,
-      aspectRatio: 0.8,
-      plugins: {
-        tooltip: {
-          mode: 'index',
-          intersect: false,
-        },
-        legend: {
-          labels: {
-            color: textColor,
-          },
-        },
-      },
-      scales: {
-        x: {
-          stacked: true,
-          ticks: {
-            color: textColorSecondary,
-          },
-          grid: {
-            color: surfaceBorder,
-            drawBorder: false,
-          },
-        },
-        y: {
-          stacked: true,
-          ticks: {
-            color: textColorSecondary,
-          },
-          grid: {
-            color: surfaceBorder,
-            drawBorder: false,
-          },
-        },
-      },
-    };
+    this.barChartService.dataSubject.subscribe((data) => {
+      this.data = data;
+    });
   }
+
+
+
+
 }

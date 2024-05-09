@@ -131,6 +131,11 @@ import { BarChartComponent } from './components/analytics/bar-chart/bar-chart.co
 import { PieChartComponent } from './components/analytics/pie-chart/pie-chart.component';
 import { LineChartComponent } from './components/analytics/line-chart/line-chart.component';
 import { HorizontalChartComponent } from './components/analytics/horizontal-chart/horizontal-chart.component';
+import { DatePipe } from '@angular/common';
+
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -268,6 +273,7 @@ import { HorizontalChartComponent } from './components/analytics/horizontal-char
   providers: [
     ConfirmationService, 
     MessageService, 
+    DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: ProjectInterceptor, multi: true },
     provideAnimationsAsync()
   ],
