@@ -1,21 +1,21 @@
 
 
 
-export interface DataSet {
+export interface BarChartDataSet {
     color: string;
     data: number[];
     vendor: string;
 }
 
-export interface ChartModel {
-    data: DataSet[];
+export interface BarChartModelItem {
+    data: BarChartDataSet[];
     label: string[];
 }
 
 export interface BarChartModel {
-    total_amount: ChartModel;
-    total_amount_subtotal: ChartModel;
-    total_tax: ChartModel;
+    total_amount: BarChartModelItem;
+    total_amount_subtotal: BarChartModelItem;
+    total_tax: BarChartModelItem;
 }
 
 export interface BarChartData {

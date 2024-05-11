@@ -9,11 +9,21 @@
 
 
 
-.custom-chart {
-    /* Ensure the chart fills its container */
-    width: 50%;
-    /* Set a maximum width to maintain readability on larger screens */
-    max-width: 50%;
-    /* Allow the height to adjust according to the width */
-    height: auto;
+
+
+
+:host {
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Adjust the size of the chart */
+  .polarAreaChart {
+    width: 110%; /* Adjust width as needed */
+    height: 110%; /* Adjust height as needed */
+  }
+
+
+  .dropdown-item {
+    cursor: pointer;
 }

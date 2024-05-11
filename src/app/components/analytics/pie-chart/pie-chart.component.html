@@ -1,41 +1,73 @@
 <div class="container">
-    <div class="row">
-      <div class="col-md-2">
-        <button mat-fab extended color="primary" id="" (click)="refresh()">
-          <i class="fas fa-sync-alt"></i> Refresh
-        </button>
+  <div class="row">
+    <div class="col-md-2">
+      <button mat-fab extended color="primary" id="" (click)="refresh()">
+        <i class="fas fa-sync-alt"></i> Refresh
+      </button>
+    </div>
+
+    <div class="col-md-2">
+      <div class="card flex justify-content-center">
+        <p-floatLabel>
+          <p-calendar
+            [(ngModel)]="rangeDates"
+            selectionMode="range"
+            [numberOfMonths]="1"
+            view="month"
+            dateFormat="mm/yy"
+            inputId="Date"
+            (onSelect)="onDateRangeSelect($event)"
+          />
+          <label for="Date">Date</label>
+        </p-floatLabel>
       </div>
-  
-      <div class="col-md-2">
-        <div class="card flex justify-content-center">
-          <p-floatLabel>
-            <p-calendar
-              [(ngModel)]="rangeDates"
-              selectionMode="range"
-              [numberOfMonths]="2"
-              inputId="Date"
-            />
-            <label for="Date">Date</label>
-          </p-floatLabel>
+    </div>
+    <div class="col-md-4">
+      <div style="text-align: right">
+        <div class="btn-group">
+          <button
+            type="button"
+            class="btn btn-info dropdown-toggle"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Spending Type
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" (click)="changeChartType('total_amount')"
+              >Total</a
+            >
+            <a
+              class="dropdown-item"
+              (click)="changeChartType('total_amount_subtotal')"
+              >Subtotal</a
+            >
+            <a class="dropdown-item" (click)="changeChartType('total_tax')"
+              >Tax</a
+            >
+          </div>
         </div>
       </div>
     </div>
+  </div>
   <hr />
-  
+
   <div class="row">
     <div class="col-lg-6">
-        <div class="flex justify-content-center">
-            <p-chart type="pie" [data]="data" [options]="options" class="custom-chart"></p-chart>
-        </div>
-
+      <div class="polarAreaChart">
+        <p-chart
+          type="pie"
+          [data]="data"
+          [options]="options"
+          class="custom-chart"
+        ></p-chart>
+      </div>
     </div>
     <div class="col-lg-6">
-        <div class="flex justify-content-center">
-            <p-chart type="polarArea" [data]="data" [options]="options" />
-        </div>
+      <div class="polarAreaChart">
+        <p-chart type="polarArea" [data]="data" [options]="options" />
+      </div>
+    </div>
   </div>
-
-  
-  
-  
-  </div>
+</div>

@@ -17,7 +17,6 @@
               dateFormat="mm/yy" 
               inputId="Date"
               (onSelect)="onDateRangeSelect($event)"
-
             />
             <label for="Date">Date</label>
           </p-floatLabel>
@@ -31,9 +30,9 @@
                   Spending Type
               </button>
               <div class="dropdown-menu">
-                  <a class="dropdown-item" >Total</a>
-                  <a class="dropdown-item" >Subtotal</a>
-                  <a class="dropdown-item" >Tax</a>
+                  <a class="dropdown-item" (click)="changeChartType('total_amount')">Total</a>
+                  <a class="dropdown-item" (click)="changeChartType('total_amount_subtotal')">Subtotal</a>
+                  <a class="dropdown-item" (click)="changeChartType('total_tax')">Tax</a>
               </div>
           </div>
       </div>

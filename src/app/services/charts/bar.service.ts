@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ReceiptService } from '../receipt.service';
-import { BarChartData, BarChartModel, ChartModel, DataSet } from 'src/app/models/bar.chart.model';
+import { BarChartData, BarChartModel, BarChartModelItem, BarChartDataSet } from 'src/app/models/bar.chart.model';
 import { UtilsService } from '../utils.service';
 import { Subject } from 'rxjs';
+import { Chart } from 'chart.js/dist';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,6 @@ export class BarService {
   barChartModel: BarChartModel;
 
   constructor(private reciept: ReceiptService) { 
-    const documentStyle = getComputedStyle(document.documentElement);
     this.setOptions();
 
     this.getDefaultBarData();
@@ -32,6 +32,20 @@ export class BarService {
       });
   }
 
+  public changeChartType(type: string){
+    if (type == 'total_amount_subtotal') {
+      this.setBarData(getComputedStyle(document.documentElement), this.barChartModel.total_amount_subtotal);
+      this.dataSubject.next(this.data);
+    }else if (type == 'total_tax') {
+      this.setBarData(getComputedStyle(document.documentElement), this.barChartModel.total_tax);
+      this.dataSubject.next(this.data);
+    }else if (type == 'total_amount') {
+      this.setBarData(getComputedStyle(document.documentElement), this.barChartModel.total_amount);
+      this.dataSubject.next(this.data);
+    }
+
+  }
+
 
 
   public getDefaultBarData() {
@@ -46,7 +60,7 @@ export class BarService {
       });
   }
 
-  setBarData(documentStyle: CSSStyleDeclaration, barData: ChartModel): void{
+  setBarData(documentStyle: CSSStyleDeclaration, barData: BarChartModelItem): void{
     this.data = {
       labels: barData.label,
       datasets: this.convertChartModelToBarChartData(barData),
@@ -63,8 +77,9 @@ export class BarService {
     const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
     this.options = {
+      
       maintainAspectRatio: false,
-      aspectRatio: 0.8,
+      aspectRatio: .4,
       plugins: {
         tooltip: {
           mode: 'index',
@@ -102,7 +117,7 @@ export class BarService {
 
   }
 
-  convertChartModelToBarChartData(chartModel: ChartModel): BarChartData[]{
+  convertChartModelToBarChartData(chartModel: BarChartModelItem): BarChartData[]{
     
     const barchartList: BarChartData[] = [];
     
@@ -114,7 +129,7 @@ export class BarService {
     return barchartList;
   }
 
-  convertDataSetToBarChartData(dataSet: DataSet): BarChartData{
+  convertDataSetToBarChartData(dataSet: BarChartDataSet): BarChartData{
     return {
       type: 'bar',
       label: dataSet.vendor,
