@@ -12,6 +12,8 @@ export class PieService {
   pieChartModel: PieData;
   data: any;
   options: any;
+
+  
   constructor(private reciept: ReceiptService) {
     this.setOptions();
     this.getDefaultPieData();
@@ -23,7 +25,7 @@ export class PieService {
     this.reciept.getPieChartData(UtilsService.getFirstDayOfYear(), UtilsService.getLastDayOfYear())
       .subscribe((data: { message: string; data_all: PieData; }) => {
         this.pieChartModel = data.data_all;
-        console.log("bar data: "+JSON.stringify(this.pieChartModel));
+        console.log("pie data: "+JSON.stringify(this.pieChartModel));
         this.setPieData(documentStyle, this.pieChartModel.total_amount);
         this.dataSubject.next(this.data);
       });

@@ -6,6 +6,7 @@ import { Reciept } from '../models/reciept.model';
 import { TreeNode } from '../models/treeNode.model';
 import { BarChartModel } from '../models/bar.chart.model';
 import { PieData } from '../models/pie.chart.model';
+import { LineHorizantalChartData } from '../models/line.chart.model';
 
 export const ApiConstants = {
   // BLOB CONTROLLER
@@ -21,6 +22,8 @@ export const ApiConstants = {
   // ANALYTICS CONTROLLER
   GET_BAR_CHART_DATA: '/get-bar-chart-data',
   GET_PIE_CHART_DATA: '/get-pie-chart-data',
+  GET_LINE_CHART_DATA: '/get-line-chart-data',
+  GET_HORIZANTAL_CHART_DATA: '/get-horizontal-chart-data',
 
   // HEALTH CONTROLLER
   GET_HEALTH: '/health',
@@ -121,6 +124,15 @@ export class ReceiptService {
       const url = `${this.apiUrl}${ApiConstants.GET_PIE_CHART_DATA}?start_date=${start_date}&end_date=${end_date}`;
       return this.http.get<{message: string, data_all: PieData}>(url);
     }
-
+    
+    getLineChartData(start_date, end_date): Observable<{message: string, data_all: LineHorizantalChartData}> {
+      const url = `${this.apiUrl}${ApiConstants.GET_LINE_CHART_DATA}?start_date=${start_date}&end_date=${end_date}`;
+      return this.http.get<{message: string, data_all: LineHorizantalChartData}>(url);
+    }
+    
+    getHorizontalChartData(start_date, end_date): Observable<{message: string, data_all: LineHorizantalChartData}> {
+      const url = `${this.apiUrl}${ApiConstants.GET_HORIZANTAL_CHART_DATA}?start_date=${start_date}&end_date=${end_date}`;
+      return this.http.get<{message: string, data_all: LineHorizantalChartData}>(url);
+    }
 
 }
