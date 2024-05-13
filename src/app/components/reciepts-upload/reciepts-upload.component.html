@@ -1,36 +1,15 @@
-<div class="container mt-5">
+<nav class="navbar navbar-expand-md">
+  <div class="container">
     <div class="row">
-      <div class="col-md-6 offset-md-3">
-        <h2 class="text-center">Upload PDF Receipts For AI To Be Processed</h2>
-        <form (ngSubmit)="onSubmits(form)" #form="ngForm" >
-          <div class="form-group">
-            <label for="companyName">Company Name:</label>
-            <select class="form-control" id="companyName" ngModel name="companyName">
-              <option value="Hattab LLC">Hattab LLC</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="customerName">Purchesed By:</label>
-            <select class="form-control" id="customerName" ngModel name="customerName">
-              <option value="Mohammed Hattab">Mohammed Hattab</option>
-              <option value="Haider Hattab">Haider Hattab</option>
-              <option value="Ahmed Mushatet">Ahmed Mushatet</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="pdfFile">Select PDF files:</label>
-            <input type="file" class="form-control-file" id="pdfFile" accept=".pdf" multiple (change)="onFilesSelected($event)">
-          </div>
-          <div class="text-center">
-            <button type="submit" class="btn btn-primary" [disabled]="selectedFiles.length === 0 
-            || form.value.customerName.trim() === '' || form.value.companyName.trim() === ''">Upload</button>
-          </div>
-        </form>
+      <div class="col">
+        <a class="navbar-brand" (click)="loadComponent('ai-assissted')">AI Assissted</a>
+      </div>
+      <div class="col">
+        <a class="navbar-brand" (click)="loadComponent('ai-process')">Full AI Process</a>
       </div>
     </div>
-    <app-result-box
-    [isSuccessful]="isSubmissionSuccessful"
-    [message]="submitStatus"
-    (closed)="clearSubmitStatus()"
-  ></app-result-box>
   </div>
+</nav>
+
+<div class="col" #dynamicComponentContainer></div>
+

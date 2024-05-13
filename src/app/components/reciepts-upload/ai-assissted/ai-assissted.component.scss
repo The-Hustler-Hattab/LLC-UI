@@ -1,0 +1,20 @@
+.card {
+    display: flex;           /* Use flexbox for layout */
+    justify-content: center; /* Center the form horizontally */
+    padding: 20px;           /* Add some padding around the card */
+    margin: 20px;            /* Margin to separate the card from other elements */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    border-radius: 8px;      /* Rounded corners for the card */
+    background-color: #fff;  /* White background */
+    width: 50%;              /* Set a fixed width, or use max-width for responsiveness */
+    max-width: 10em;        /* Maximum width of the card */
+}
+
+
+.pdf-iframe {
+    width: 60vw; /* 80% of the viewport width */
+    height: 80vh; /* 80% of the viewport height */
+    border: none; /* removes the border for a cleaner look */
+    margin-top: 10px; /* Adds space at the top */
+
+  }

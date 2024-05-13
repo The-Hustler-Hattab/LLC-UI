@@ -17,6 +17,7 @@ export const ApiConstants = {
   // RECEIPT CONTROLLER
   GET_LIST_OF_RECEIPTS: '/get-list-of-receipts',
   POST_PROCESS_RECIPTS: '/process-receipts', // ADD '/{company_name}/{customer_name}'
+  POST_PROCESS_RECIPTS_AI_ASSISSTED: '/process-receipts-ai-assisted', // ADD '/{company_name}/{customer_name}'
   DELETE_BY_ID: '/delete-by-id',
 
   // ANALYTICS CONTROLLER
@@ -80,6 +81,17 @@ export class ReceiptService {
 
     return this.http.post<{message: string}>(url, formData);
   }
+
+  processReceiptsAIAssissted(file: File): Observable<{message: string, document_details: Reciept}> {
+    
+    const formData = new FormData();
+    formData.append('file', file);
+    console.log("file: "+file);
+    const url = `${this.apiUrl}${ApiConstants.POST_PROCESS_RECIPTS_AI_ASSISSTED}`;
+
+    return this.http.post<{message: string, document_details: Reciept}>(url, formData);
+  }
+
  /**
    * Retrieves a list of receipts from the Receipt controller.
    * @returns An observable of Reciept[], representing the list of receipts.

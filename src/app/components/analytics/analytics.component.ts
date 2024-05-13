@@ -16,7 +16,7 @@ export class AnalyticsComponent
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver) {}
   ngAfterViewInit(): void {
-    this.loadComponent('pie-chart');
+    this.loadComponent('bar-chart');
 
     }
    

@@ -132,6 +132,8 @@ import { PieChartComponent } from './components/analytics/pie-chart/pie-chart.co
 import { LineChartComponent } from './components/analytics/line-chart/line-chart.component';
 import { HorizontalChartComponent } from './components/analytics/horizontal-chart/horizontal-chart.component';
 import { DatePipe } from '@angular/common';
+import { FullAiComponent } from './components/reciepts-upload/full-ai/full-ai.component';
+import { AiAssisstedComponent } from './components/reciepts-upload/ai-assissted/ai-assissted.component';
 
 
 
@@ -153,7 +155,9 @@ import { DatePipe } from '@angular/common';
     BarChartComponent,
     PieChartComponent,
     LineChartComponent,
-    HorizontalChartComponent
+    HorizontalChartComponent,
+    FullAiComponent,
+    AiAssisstedComponent
   ],
   imports: [
     BrowserModule,
