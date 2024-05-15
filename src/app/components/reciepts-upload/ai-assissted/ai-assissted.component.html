@@ -1,5 +1,5 @@
 <div class="container" *ngIf="uploaded === false">
-  <h2 class="text-center">Upload PDF Receipt</h2>
+  <h2 class="text-center">Upload Receipt</h2>
 
   <form (ngSubmit)="onSubmits(form)" #form="ngForm">
     <div class="form-group">
@@ -21,7 +21,7 @@
         class="btn btn-danger"
         [disabled]="selectedFile === null"
       >
-        Upload
+        Analyze 
       </button>
     </div>
   </form>
@@ -73,10 +73,10 @@
       <div class="text-center">
         <button type="submit" class="btn btn-danger mt-3" 
         [disabled]="formData.vendor==null || formData.total==null || formData.sub_total==null ||
-         formData.tax==null  || formData.company_name==null || formData.customer_name==null || formData.purchased_at==null 
+         formData.tax==null  || formData.company_name==null || formData.customer_name==null  
         || formData.vendor=='' || formData.total=='' || formData.sub_total=='' ||
-         formData.tax ==''|| formData.company_name=='' || formData.customer_name=='' || formData.purchased_at==''  " 
-        (click)="storeReciept()">Submit</button>
+         formData.tax ==''|| formData.company_name=='' || formData.customer_name==''   " 
+        (click)="storeReciept()">Store</button>
       </div>
       <hr>
       <iframe *ngIf="pdfSrc" [src]="pdfSrc" class="pdf-iframe" ></iframe>
