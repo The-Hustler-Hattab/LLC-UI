@@ -34,16 +34,16 @@
   <h2 class="text-center">Edit PDF Receipt</h2>
 
       <label for="companyName" class="form-label">Company Name*:</label>
-      <select class="form-control" id="companyName" ngModel name="companyName">
+      <select class="form-control" id="company_name" [(ngModel)]="formData.company_name" name="company_name">
         <option *ngFor="let company of companies" [value]="company">{{ company }}</option>
       </select>
 
       <label for="customerName" class="form-label">Purchased By*:</label>
-      <select class="form-control" id="customerName" ngModel name="customerName">
+      <select class="form-control" id="customer_name"  [(ngModel)]="formData.customer_name" name="customer_name">
         <option *ngFor="let user of users" [value]="user">{{ user }}</option>
       </select>
 
-      <label for="purchasedAt" class="form-label">Purchased At*:</label>
+      <label for="purchased_at" class="form-label">Purchased At*:</label>
         <p-calendar 
             [(ngModel)]="date" 
             inputId="purchased_at"
@@ -71,9 +71,21 @@
       <label for="invoiceId" class="form-label">Invoice ID:</label>
       <input type="text" id="invoiceId" [(ngModel)]="formData.invoice_id" name="invoiceId" class="form-control">
       <div class="text-center">
-        <button type="submit" class="btn btn-danger mt-3">Submit</button>
+        <button type="submit" class="btn btn-danger mt-3" 
+        [disabled]="formData.vendor==null || formData.total==null || formData.sub_total==null ||
+         formData.tax==null  || formData.company_name==null || formData.customer_name==null || formData.purchased_at==null 
+        || formData.vendor=='' || formData.total=='' || formData.sub_total=='' ||
+         formData.tax ==''|| formData.company_name=='' || formData.customer_name=='' || formData.purchased_at==''  " 
+        (click)="storeReciept()">Submit</button>
       </div>
       <hr>
       <iframe *ngIf="pdfSrc" [src]="pdfSrc" class="pdf-iframe" ></iframe>
+
+
+      <app-result-box
+      [isSuccessful]="isSubmissionSuccessful"
+      [message]="submitStatus"
+      (closed)="clearSubmitStatus()"
+    ></app-result-box>
 
 </form>

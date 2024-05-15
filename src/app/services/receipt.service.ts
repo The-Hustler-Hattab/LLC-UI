@@ -17,7 +17,8 @@ export const ApiConstants = {
   // RECEIPT CONTROLLER
   GET_LIST_OF_RECEIPTS: '/get-list-of-receipts',
   POST_PROCESS_RECIPTS: '/process-receipts', // ADD '/{company_name}/{customer_name}'
-  POST_PROCESS_RECIPTS_AI_ASSISSTED: '/process-receipts-ai-assisted', // ADD '/{company_name}/{customer_name}'
+  POST_PROCESS_RECIPTS_AI_ASSISSTED: '/process-receipts-ai-assisted', // ADD
+  POST_STORE_RECIPTS_AI_ASSISSTED: '/store-receipts-ai-assisted', 
   DELETE_BY_ID: '/delete-by-id',
 
   // ANALYTICS CONTROLLER
@@ -90,6 +91,28 @@ export class ReceiptService {
     const url = `${this.apiUrl}${ApiConstants.POST_PROCESS_RECIPTS_AI_ASSISSTED}`;
 
     return this.http.post<{message: string, document_details: Reciept}>(url, formData);
+  }
+
+  storeReceiptsAIAssissted(file: File,total:number,sub_total:number,tax:number,company_name: string,
+    vendor:string,purchased_at:string,vendor_address:string,customer_name:string,invoice_id:string
+  ): Observable<{message: string}> {
+    console.log("date: "+purchased_at);
+    
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('total',total.toString());
+    formData.append('sub_total',sub_total.toString());
+    formData.append('tax',tax.toString());
+    formData.append('company_name',company_name);
+    formData.append('vendor',vendor);
+    formData.append('purchased_at',purchased_at);
+    formData.append('vendor_address',vendor_address);
+    formData.append('customer_name',customer_name);
+    formData.append('invoice_id',invoice_id);
+
+    const url = `${this.apiUrl}${ApiConstants.POST_STORE_RECIPTS_AI_ASSISSTED}`;
+
+    return this.http.post<{message: string}>(url, formData);
   }
 
  /**
