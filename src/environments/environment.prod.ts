@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  // rooturl : 'https://c2-server.mtattab.com',
+  receiptFlaskApi : 'https://receipt-app-tvan66p23a-uc.a.run.app'
 
 
 

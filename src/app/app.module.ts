@@ -131,12 +131,21 @@ import { BarChartComponent } from './components/analytics/bar-chart/bar-chart.co
 import { PieChartComponent } from './components/analytics/pie-chart/pie-chart.component';
 import { LineChartComponent } from './components/analytics/line-chart/line-chart.component';
 import { HorizontalChartComponent } from './components/analytics/horizontal-chart/horizontal-chart.component';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FullAiComponent } from './components/reciepts-upload/full-ai/full-ai.component';
 import { AiAssisstedComponent } from './components/reciepts-upload/ai-assissted/ai-assissted.component';
+import { OKTA_CONFIG, OktaAuthModule } from '@okta/okta-angular';
+import { OAuthModule } from 'angular-oauth2-oidc';
+import { OktaAuth } from '@okta/okta-auth-js';
 
+const oktaConfig = {
+  issuer: 'https://dev-54597357.okta.com/oauth2/default',
+  clientId: '0oad2eazksQrQF9Sb5d7',
+  redirectUri: '/callback',
+  scopes: ['openid', 'profile', 'email']
+};
 
-
+const oktaAuth = new OktaAuth(oktaConfig);
 
 @NgModule({
   declarations: [
@@ -271,13 +280,17 @@ import { AiAssisstedComponent } from './components/reciepts-upload/ai-assissted/
     MatDatepickerModule,
     MatListModule,
     MatInputModule,
-    FloatLabelModule
+    FloatLabelModule,
+    OAuthModule.forRoot(),
+    OktaAuthModule,
+    CommonModule
     
   ],
   providers: [
     ConfirmationService, 
     MessageService, 
     DatePipe,
+    { provide: OKTA_CONFIG, useValue: { oktaAuth } },
     { provide: HTTP_INTERCEPTORS, useClass: ProjectInterceptor, multi: true },
     provideAnimationsAsync()
   ],

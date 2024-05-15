@@ -1,0 +1,26 @@
+version: 0.2
+env:
+  variables:
+    BUCKET_URL: "{{BUCKET_URL}}"
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+  pre_build:
+    commands:
+      - echo Nothing to do in the pre_build phase...
+  build:
+    commands:
+      - echo Build started on `date`
+      - npm install
+      - npm install -g @angular/cli
+      - ng build --configuration production
+  post_build:
+    commands:
+      - echo erasing the s3 bucket `date`
+      - aws s3 rm $BUCKET_URL --recursive
+artifacts:
+  files:
+    - '**/**'
+  base-directory: 'dist/c2c-ui**'
+  # discard-paths: yes

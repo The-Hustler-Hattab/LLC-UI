@@ -9,24 +9,42 @@
           <a class="nav-link" routerLinkActive="active" routerLink="/home">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/analytics">Analytics</a>
+          <a class="nav-link" routerLinkActive="active" routerLink="/analytics" *ngIf="(authService.authState$ | async)?.isAuthenticated">Analytics</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/reciepts-upload">Process Reciept</a>
+          <a class="nav-link" routerLinkActive="active" routerLink="/reciepts-upload" *ngIf="(authService.authState$ | async)?.isAuthenticated">Process Reciept</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/reciepts">Reciept Files</a>
+          <a class="nav-link" routerLinkActive="active" routerLink="/reciepts" *ngIf="(authService.authState$ | async)?.isAuthenticated">Reciept Files</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/reciepts-table">Reciept Table</a>
+          <a class="nav-link" routerLinkActive="active" routerLink="/reciepts-table" *ngIf="(authService.authState$ | async)?.isAuthenticated">Reciept Table</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/contact">Contact</a>
+          <a class="nav-link" routerLinkActive="active" routerLink="/contact" >Contact</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLinkActive="active" routerLink="/about">About</a>
         </li>
+        
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+          <li class="nav-item ">
+              <a class="nav-link "
+              *ngIf="(authService.authState$ | async)?.isAuthenticated" (click)="logout()" style="cursor:pointer">Log out</a>
+          </li>
+          <li class="nav-item ">
+              <a class="nav-link" 
+              *ngIf="!(authService.authState$ | async)?.isAuthenticated" (click)="login()" style="cursor:pointer">Log in</a>
+          </li>
+<!-- 
+          <li class="nav-item active">
+              <a class="nav-link" 
+               (click)="print()" href="#">print</a>
+          </li> -->
+
+          
+      </ul>
       </ul>
     </div>
   </nav>

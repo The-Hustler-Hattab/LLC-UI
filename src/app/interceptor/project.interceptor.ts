@@ -2,12 +2,15 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpInterce
 import { Router } from '@angular/router';
 import { Observable, catchError, tap, throwError } from 'rxjs';
 import { LoadingSpinnerServiceService } from '../services/loading-spinner-service.service';
-import { Injectable } from '@angular/core';
-
+import { Inject, Injectable } from '@angular/core';
+import { OKTA_AUTH } from '@okta/okta-angular';
+import { OktaAuth } from '@okta/okta-auth-js';
 @Injectable()
 export class ProjectInterceptor implements HttpInterceptor {
   constructor(private loadingSpinner: LoadingSpinnerServiceService,
-  private router : Router) {
+  private router : Router,
+   @Inject(OKTA_AUTH) private oktaAuth: OktaAuth
+  ) {
  }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.loadingSpinner.show()
@@ -17,7 +20,14 @@ export class ProjectInterceptor implements HttpInterceptor {
   }
 
   private handleAccess(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const accessToken = this.oktaAuth.getAccessToken();
+    // console.log(accessToken);
     
+    request = request.clone({
+      setHeaders: {
+        Authorization: 'Bearer ' + accessToken
+      }
+    });
 
     return next.handle(request).pipe(
       tap((event: HttpEvent<any>) => {
