@@ -140,7 +140,7 @@ import { OktaAuth } from '@okta/okta-auth-js';
 
 const oktaConfig = {
   issuer: 'https://dev-54597357.okta.com/oauth2/default',
-  clientId: '0oad2eazksQrQF9Sb5d7',
+  clientId: '0oah3i1pl3DeOXeIi5d7',
   redirectUri: '/callback',
   scopes: ['openid', 'profile', 'email']
 };
