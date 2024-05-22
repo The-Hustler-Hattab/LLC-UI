@@ -22,7 +22,7 @@
       <ng-template pTemplate="caption">
   
           <div class="row">
-              <div class="col-md-5">
+              <div class="col-md-4">
                   <mat-form-field>
                       <mat-label>Filter</mat-label>
                       <div class="row">
@@ -41,12 +41,35 @@
                     </mat-form-field>
               </div>
 
-              <div class="col-md-2">
+              <div class="col-md-3">
                   <button mat-fab extended color="primary" id="" (click)="refresh()">
                       <i class="fas fa-sync-alt"></i> Refresh
                     </button>
   
               </div>
+              
+              <div class="col-md-3">
+                <div class="card flex justify-content-center">
+                  <p-floatLabel>
+                    <p-calendar
+                      [(ngModel)]="rangeDates"
+                      selectionMode="range"
+                      [numberOfMonths]="1"
+                      view="month" 
+                      dateFormat="mm/yy" 
+                      inputId="Date"
+                    />
+                    <label for="Date">Export Date</label>
+                  </p-floatLabel>
+                </div>
+              </div>
+              
+              <div class="col-md-2"*ngIf="isRangeValid()">
+                <button mat-fab extended color="warn" (click)="exportFile()">
+                  <i class="fas fa-download"></i> 
+                </button>
+
+            </div>
           </div>
   
         

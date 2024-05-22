@@ -30,20 +30,20 @@ export class FilesService {
   downloadFile(file_path: string) {
     this.recieptService.getFileBlob(file_path).subscribe(
       (blob: Blob) => {
-        this.saveFile(blob, file_path);
+        FilesService.saveFile(blob, file_path);
       }
     );
   }
 
-  public saveFile(blobData: Blob, fileName: string) {
+  public static saveFile(blobData: Blob, fileName: string) {
     const downloadLink = document.createElement('a');
     const url = window.URL.createObjectURL(blobData);
     downloadLink.href = url;
-    downloadLink.download = this.getFileNameFromPath(fileName); 
+    downloadLink.download = FilesService.getFileNameFromPath(fileName); 
     downloadLink.click();
     window.URL.revokeObjectURL(url); 
   }
-  private getFileNameFromPath(fullPath: string): string {
+  private static getFileNameFromPath(fullPath: string): string {
     const parts = fullPath.split('/');
     if (parts.length > 0) {
       return parts[parts.length - 1];

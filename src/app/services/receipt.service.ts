@@ -12,6 +12,7 @@ export const ApiConstants = {
   // BLOB CONTROLLER
   GET_FILE: '/get-file',
   GET_LIST_OF_FILES: '/get-list-of-files',
+  GET_FILES_BETWEEN_AS_ZIP: '/files-between',
   DELETE_FILE: '/delete-file', // ADD '?blob_name={path}'
 
   // RECEIPT CONTROLLER
@@ -64,6 +65,11 @@ export class ReceiptService {
    */
   getFileBlob(path: string): Observable<Blob>{
     const url = `${this.apiUrl}${ApiConstants.GET_FILE}?path=${path}`;
+    return this.http.get(url, { responseType: 'blob' })
+  
+  }
+  getFileBetweenAsZipBlob(start_date: string,end_date: string): Observable<Blob>{
+    const url = `${this.apiUrl}${ApiConstants.GET_FILES_BETWEEN_AS_ZIP}?start_date=${start_date}&end_date=${end_date}`;
     return this.http.get(url, { responseType: 'blob' })
   
   }

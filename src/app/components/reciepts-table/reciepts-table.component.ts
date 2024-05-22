@@ -5,6 +5,8 @@ import { Table } from 'primeng/table';
 import { RecieptsTableService } from 'src/app/services/table/reciepts-table.service';
 import { ReceiptService } from 'src/app/services/receipt.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { UtilsService } from 'src/app/services/utils.service';
+import { FilesService } from 'src/app/services/azure-blob/files.service';
 
 @Component({
   selector: 'app-reciepts-table',
@@ -13,8 +15,10 @@ import { ConfirmationService, MessageService } from 'primeng/api';
   
 })
 export class RecieptsTableComponent {
-  @ViewChild('dt1') dt: Table | undefined;
 
+
+  @ViewChild('dt1') dt: Table | undefined;
+  rangeDates: Date[] | undefined;
   logs: Reciept[] = [];
   loading: boolean = false;
   cols!: Column[];
@@ -23,8 +27,7 @@ export class RecieptsTableComponent {
   submitStatus: string = null;
 
 
-  constructor(private logService: RecieptsTableService,private recieptsService: ReceiptService,
-    private confirmationService: ConfirmationService, private messageService: MessageService
+  constructor(private logService: RecieptsTableService,private recieptsService: ReceiptService
   ) {
 
   }
@@ -96,6 +99,26 @@ export class RecieptsTableComponent {
     this.submitStatus = null;
     this.isSubmissionSuccessful = null;
   }
+  exportFile() {
+    console.log(this.rangeDates);
+    const date: string[]|undefined = UtilsService.onDateRangeSelect(this.rangeDates);
+    if (date != undefined) {
+      const start_time = date[0];
+      const end_time = date[1];
+      this.recieptsService.getFileBetweenAsZipBlob(start_time, end_time).subscribe((blob) => {
+        FilesService.saveFile(blob, "Reciepts.zip");
 
+      });
+    }
+    }
+
+  isRangeValid(): boolean{
+    if (this.rangeDates) {
+      
+      return this.rangeDates[0]!==null && this.rangeDates[1]!==null;      
+    }else{
+      return false;
+    }
+  }
 
 }
