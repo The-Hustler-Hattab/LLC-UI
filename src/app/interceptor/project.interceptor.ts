@@ -22,7 +22,9 @@ export class ProjectInterceptor implements HttpInterceptor {
   private handleAccess(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const accessToken = this.oktaAuth.getAccessToken();
     // console.log(accessToken);
-    
+    if ( accessToken == null || accessToken == undefined || accessToken == '') {
+      this.router.navigate(['/']);
+    }
     request = request.clone({
       setHeaders: {
         Authorization: 'Bearer ' + accessToken
@@ -49,6 +51,8 @@ export class ProjectInterceptor implements HttpInterceptor {
       }),
       
     )
+
+    
   }
   
 }

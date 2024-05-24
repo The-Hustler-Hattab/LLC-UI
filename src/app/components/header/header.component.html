@@ -22,6 +22,9 @@
           <a class="nav-link" routerLinkActive="active" routerLink="/reciepts-table" *ngIf="(authService.authState$ | async)?.isAuthenticated">Reciept Table</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="https://receipt-app-tvan66p23a-uc.a.run.app/apidocs" target="_blank" *ngIf="(authService.authState$ | async)?.isAuthenticated">Swagger UI</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" routerLinkActive="active" routerLink="/contact" >Contact</a>
         </li>
         <li class="nav-item">
