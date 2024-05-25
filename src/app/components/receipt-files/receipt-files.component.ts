@@ -66,7 +66,8 @@ export class ReceiptFilesComponent {
         this.filesService.getFiles();
       },
       (error) => {
-        this.submitStatus = error.message;
+        console.log(error);
+        this.submitStatus = error.error.message;
         this.isSubmissionSuccessful = false;
       }
     

@@ -76,7 +76,7 @@ export class RecieptsTableComponent {
         this.refresh();
       },
       (error) => {
-        this.submitStatus = error.message;
+        this.submitStatus = error.error.message;
         this.isSubmissionSuccessful = false;
       }
     );
