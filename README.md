@@ -1,27 +1,71 @@
-# LlcWeb
+# Receipt Processing API
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.6.
+## Overview
 
-## Development server
+The Receipt Processing API is a powerful tool developed using Flask. This application allows users to upload and process receipts to extract essential data. It is designed for use in financial management, expense tracking, and any scenario where automated receipt processing is beneficial.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Features
 
-## Code scaffolding
+1. **User Authentication:** The application supports user authentication to ensure that only authorized users can upload and process receipts.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+2. **Receipt Upload:** Users can upload receipt images or PDFs through a simple interface.
 
-## Build
+3. **Data Extraction:** The application extracts key information from the receipts, such as vendor name, date, total amount, and line items.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+4. **Data Storage:** Extracted data is stored in a structured format in a database for easy retrieval and analysis.
 
-## Running unit tests
+5. **API Endpoints:** Provides RESTful API endpoints for uploading receipts, retrieving processed data, and managing user accounts.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+6. **Error Handling:** Comprehensive error handling to manage invalid uploads, unsupported file formats, and other potential issues.
 
-## Running end-to-end tests
+## Installation
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+1. Clone the repository from GitHub: [GitHub Repository Link](https://github.com/The-Hustler-Hattab/ReceiptManagementFlask).
 
-## Further help
+2. Navigate to the project directory.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+3. Create a virtual environment:
+    ```bash
+    $ python3 -m venv venv
+    ```
+
+4. Activate the virtual environment:
+    - On Windows:
+        ```bash
+        $ venv\Scripts\activate
+        ```
+    - On macOS and Linux:
+        ```bash
+        $ source venv/bin/activate
+        ```
+
+5. Install the required dependencies:
+    ```bash
+    $ pip install -r requirements.txt
+    ```
+
+6. Run the application:
+    ```bash
+    $ flask run
+    ```
+
+
+## Technologies Used
+
+- **Flask:** Python micro web framework used for building the web application.
+- **Tesseract OCR:** Optical character recognition engine for extracting text from images.
+- **PostgreSQL:** Relational database used for storing extracted receipt data.
+- **JWT:** JSON Web Tokens for secure user authentication.
+
+
+## Contribution
+
+Contributions are welcome! Please fork the repository and submit a pull request for any enhancements or bug fixes.
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+---
+
+Feel free to reach out if you have any questions or need further assistance. Happy coding!
