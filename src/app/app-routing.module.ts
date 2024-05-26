@@ -9,6 +9,7 @@ import { RecieptsTableComponent } from './components/reciepts-table/reciepts-tab
 import { AnalyticsComponent } from './components/analytics/analytics.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { OktaCallbackComponent } from '@okta/okta-angular';
+import { LinksComponent } from './components/links/links.component';
 
 const routes: Routes = [
   {path:"home", component: HomeComponent},
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path:"reciepts-upload", component: RecieptsUploadComponent},
   {path:"analytics", component: AnalyticsComponent},
   {path:"contact", component: ContactComponent},
+  {path:"links", component: LinksComponent},
   {path: 'callback', component: OktaCallbackComponent},
 
   {path: 'page-not-found', component: PageNotFoundComponent},

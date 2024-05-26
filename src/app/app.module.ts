@@ -10,7 +10,6 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// Import PrimeNG modules
 import { AccordionModule } from 'primeng/accordion';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { AvatarModule } from 'primeng/avatar';
@@ -137,6 +136,7 @@ import { AiAssisstedComponent } from './components/reciepts-upload/ai-assissted/
 import { OKTA_CONFIG, OktaAuthModule } from '@okta/okta-angular';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { OktaAuth } from '@okta/okta-auth-js';
+import { LinksComponent } from './components/links/links.component';
 
 const oktaConfig = {
   issuer: 'https://dev-54597357.okta.com/oauth2/default',
@@ -166,7 +166,9 @@ const oktaAuth = new OktaAuth(oktaConfig);
     LineChartComponent,
     HorizontalChartComponent,
     FullAiComponent,
-    AiAssisstedComponent
+    AiAssisstedComponent,
+    LinksComponent
+
   ],
   imports: [
     BrowserModule,
@@ -283,7 +285,7 @@ const oktaAuth = new OktaAuth(oktaConfig);
     FloatLabelModule,
     OAuthModule.forRoot(),
     OktaAuthModule,
-    CommonModule
+    CommonModule,
     
   ],
   providers: [
