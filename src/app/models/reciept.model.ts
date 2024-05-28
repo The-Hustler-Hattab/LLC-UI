@@ -13,4 +13,5 @@ export interface Reciept {
     total: number;
     vendor: string;
     vendor_address: string;
+    spend_type: string;
   }

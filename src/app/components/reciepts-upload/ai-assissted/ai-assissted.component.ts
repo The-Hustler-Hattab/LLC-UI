@@ -20,7 +20,8 @@ export class AiAssisstedComponent {
   formData: any;
   users: string[] = ConstantsService.COMPANY_MEMBERS;
   companies: string[] = ConstantsService.COMPANIES;
-  
+  spendTypes: string[] = ConstantsService.SPEND_TYPE;
+
   date: Date | undefined;
   pdfSrc: SafeResourceUrl | null = null; // Use SafeResourceUrl for sanitized URLs
 
@@ -73,7 +74,8 @@ export class AiAssisstedComponent {
        this.formData.sub_total, this.formData.tax,
         this.formData.company_name, this.formData.vendor,
         formattedDate, this.formData.vendor_address,
-          this.formData.customer_name, this.formData.invoice_id)
+          this.formData.customer_name, this.formData.invoice_id,
+          this.formData.spendType)
     .subscribe(
       (data: {message: string}) => {
       console.log(JSON.stringify(data.message));

@@ -39,6 +39,7 @@ export class RecieptsTableComponent {
       { header: 'Invoice ID', field: 'invoice_id' },
       { header: 'Company Name', field: 'company_name' },
       { header: 'Purchesed By', field: 'customer_name' },
+      { header: 'Spend Type', field: 'spend_type' },
       { header: 'Vendor', field: 'vendor' },
       { header: 'File Path', field: 'file_path' },
       { header: 'Total', field: 'total' },

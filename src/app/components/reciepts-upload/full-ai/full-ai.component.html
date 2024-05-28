@@ -16,6 +16,12 @@
             </select>
           </div>
           <div class="form-group">
+            <label for="spendType">Spend Type:</label>
+            <select class="form-control" id="spendType" ngModel name="spendType">
+              <option *ngFor="let type of spendTypes" [value]="type">{{ type }}</option>
+            </select>
+          </div>
+          <div class="form-group">
             <label for="pdfFile">Select PDF files:</label>
             <input type="file" class="form-control-file" id="pdfFile" accept=".pdf" multiple (change)="onFilesSelected($event)">
           </div>

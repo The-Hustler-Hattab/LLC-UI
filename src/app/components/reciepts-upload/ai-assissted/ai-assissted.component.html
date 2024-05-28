@@ -21,71 +21,137 @@
         class="btn btn-danger"
         [disabled]="selectedFile === null"
       >
-        Analyze 
+        Analyze
       </button>
     </div>
   </form>
 </div>
 
-
-
-
 <form *ngIf="formData" class="container">
   <h2 class="text-center">Edit PDF Receipt</h2>
 
-      <label for="companyName" class="form-label">Company Name*:</label>
-      <select class="form-control" id="company_name" [(ngModel)]="formData.company_name" name="company_name">
-        <option *ngFor="let company of companies" [value]="company">{{ company }}</option>
-      </select>
+  <label for="companyName" class="form-label">Company Name*:</label>
+  <select
+    class="form-control"
+    id="company_name"
+    [(ngModel)]="formData.company_name"
+    name="company_name"
+  >
+    <option *ngFor="let company of companies" [value]="company">
+      {{ company }}
+    </option>
+  </select>
 
-      <label for="customerName" class="form-label">Purchased By*:</label>
-      <select class="form-control" id="customer_name"  [(ngModel)]="formData.customer_name" name="customer_name">
-        <option *ngFor="let user of users" [value]="user">{{ user }}</option>
-      </select>
+  <label for="customerName" class="form-label">Purchased By*:</label>
+  <select
+    class="form-control"
+    id="customer_name"
+    [(ngModel)]="formData.customer_name"
+    name="customer_name"
+  >
+    <option *ngFor="let user of users" [value]="user">{{ user }}</option>
+  </select>
 
-      <label for="purchased_at" class="form-label">Purchased At*:</label>
-        <p-calendar 
-            [(ngModel)]="date" 
-            inputId="purchased_at"
-            id="purchasedAt"
-            name="purchasedAt"
-            dateFormat="yy-mm-dd"
-            class="form-control"
-        />
-    
-      <label for="vendor" class="form-label">Vendor*:</label>
-      <input type="text" id="vendor" [(ngModel)]="formData.vendor" name="vendor" class="form-control">
+  <label for="spendType" class="form-label">Spend Type:</label>
+  <select     
+  class="form-control"
+  id="spendType"
+  [(ngModel)]="formData.spendType"
+  name="spendType">
+    <option *ngFor="let type of spendTypes" [value]="type">{{ type }}</option>
+  </select>
 
-      <label for="total" class="form-label">Total*:</label>
-      <input type="number" id="total" [(ngModel)]="formData.total" name="total" class="form-control">
+  <label for="purchased_at" class="form-label">Purchased At*:</label>
+  <p-calendar
+    [(ngModel)]="date"
+    inputId="purchased_at"
+    id="purchasedAt"
+    name="purchasedAt"
+    dateFormat="yy-mm-dd"
+    class="form-control"
+  />
 
-      <label for="subTotal" class="form-label">Sub Total*:</label>
-      <input type="number" id="subTotal" [(ngModel)]="formData.sub_total" name="subTotal" class="form-control">
+  <label for="vendor" class="form-label">Vendor*:</label>
+  <input
+    type="text"
+    id="vendor"
+    [(ngModel)]="formData.vendor"
+    name="vendor"
+    class="form-control"
+  />
 
-      <label for="tax" class="form-label">Tax*:</label>
-      <input type="number" id="tax" [(ngModel)]="formData.tax" name="tax" class="form-control">
+  <label for="total" class="form-label">Total*:</label>
+  <input
+    type="number"
+    id="total"
+    [(ngModel)]="formData.total"
+    name="total"
+    class="form-control"
+  />
 
-      <label for="vendorAddress" class="form-label">Vendor Address:</label>
-      <input type="text" id="vendorAddress" [(ngModel)]="formData.vendor_address" name="vendorAddress" class="form-control">
+  <label for="subTotal" class="form-label">Sub Total*:</label>
+  <input
+    type="number"
+    id="subTotal"
+    [(ngModel)]="formData.sub_total"
+    name="subTotal"
+    class="form-control"
+  />
 
-      <label for="invoiceId" class="form-label">Invoice ID:</label>
-      <input type="text" id="invoiceId" [(ngModel)]="formData.invoice_id" name="invoiceId" class="form-control">
-      <div class="text-center">
-        <button type="submit" class="btn btn-danger mt-3" 
-        [disabled]="formData.vendor==null || formData.total==null || formData.sub_total==null ||
-         formData.tax==null  || formData.company_name==null || formData.customer_name==null  
-        || formData.vendor=='' || formData.total=='' || formData.sub_total=='' ||
-         formData.company_name=='' || formData.customer_name==''   " 
-        (click)="storeReciept()">Store</button>
-      </div>
-      <hr>
-      <iframe *ngIf="pdfSrc" [src]="pdfSrc" class="pdf-iframe" ></iframe>
+  <label for="tax" class="form-label">Tax*:</label>
+  <input
+    type="number"
+    id="tax"
+    [(ngModel)]="formData.tax"
+    name="tax"
+    class="form-control"
+  />
 
+  <label for="vendorAddress" class="form-label">Vendor Address:</label>
+  <input
+    type="text"
+    id="vendorAddress"
+    [(ngModel)]="formData.vendor_address"
+    name="vendorAddress"
+    class="form-control"
+  />
 
-      <app-result-box
-      [isSuccessful]="isSubmissionSuccessful"
-      [message]="submitStatus"
-      (closed)="clearSubmitStatus()"
-    ></app-result-box>
+  <label for="invoiceId" class="form-label">Invoice ID:</label>
+  <input
+    type="text"
+    id="invoiceId"
+    [(ngModel)]="formData.invoice_id"
+    name="invoiceId"
+    class="form-control"
+  />
+  <div class="text-center">
+    <button
+      type="submit"
+      class="btn btn-danger mt-3"
+      [disabled]="
+        formData.vendor == null ||
+        formData.total == null ||
+        formData.sub_total == null ||
+        formData.tax == null ||
+        formData.company_name == null ||
+        formData.customer_name == null ||
+        formData.vendor == '' ||
+        formData.total == '' ||
+        formData.sub_total == '' ||
+        formData.company_name == '' ||
+        formData.customer_name == ''
+      "
+      (click)="storeReciept()"
+    >
+      Store
+    </button>
+  </div>
+  <hr />
+  <iframe *ngIf="pdfSrc" [src]="pdfSrc" class="pdf-iframe"></iframe>
 
+  <app-result-box
+    [isSuccessful]="isSubmissionSuccessful"
+    [message]="submitStatus"
+    (closed)="clearSubmitStatus()"
+  ></app-result-box>
 </form>

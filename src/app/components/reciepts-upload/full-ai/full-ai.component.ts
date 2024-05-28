@@ -14,6 +14,8 @@ export class FullAiComponent {
 
   users: string[] = ConstantsService.COMPANY_MEMBERS;
   companies: string[] = ConstantsService.COMPANIES;
+  spendTypes: string[] = ConstantsService.SPEND_TYPE;
+
 
   isSubmissionSuccessful: boolean = null;
   submitStatus: string = null;
@@ -27,12 +29,13 @@ export class FullAiComponent {
     console.log(form.value);
     const selectedCompanyName = form.value.companyName;
     const selectedCustomerName = form.value.customerName;
+    const selectedSpendType = form.value.spendType;
     if (this.selectedFiles && this.selectedFiles.length > 0) {
       // Handle file upload logic here
       console.log('Selected company name:', selectedCompanyName);
       console.log('Selected customer name:', selectedCustomerName);
       console.log('Selected files:', this.selectedFiles);
-      this.proccessReciepts(selectedCompanyName, selectedCustomerName); 
+      this.proccessReciepts(selectedCompanyName, selectedCustomerName,selectedSpendType); 
 
       // Reset form fields after upload
       this.selectedFiles = [];
@@ -41,10 +44,10 @@ export class FullAiComponent {
   }
 
 
-  private proccessReciepts(selectedCompanyName: string, selectedCustomerName: string) {
+  private proccessReciepts(selectedCompanyName: string, selectedCustomerName: string, selectedSpendType: string) {
     try {
       this.selectedFiles.forEach((file: File) => {
-        this.recieptService.processReceipts(selectedCompanyName, selectedCustomerName, file)
+        this.recieptService.processReceipts(selectedCompanyName, selectedCustomerName,selectedSpendType, file)
           .subscribe(
             (response: { message: string }) => {
               console.log(response);

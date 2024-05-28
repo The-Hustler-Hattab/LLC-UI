@@ -81,10 +81,10 @@ export class ReceiptService {
    * @param file The PDF file to upload for processing.
    * @returns An observable representing the result of the processing.
    */
-  processReceipts(company_name: string, customer_name: string, file: File): Observable<{message: string}> {
+  processReceipts(company_name: string, customer_name: string, spend_type:string, file: File): Observable<{message: string}> {
     const formData = new FormData();
     formData.append('file', file);
-    const url = `${this.apiUrl}${ApiConstants.POST_PROCESS_RECIPTS}/${company_name}/${customer_name}`;
+    const url = `${this.apiUrl}${ApiConstants.POST_PROCESS_RECIPTS}/${company_name}/${customer_name}/${spend_type}`;
 
     return this.http.post<{message: string}>(url, formData);
   }
@@ -100,7 +100,7 @@ export class ReceiptService {
   }
 
   storeReceiptsAIAssissted(file: File,total:number,sub_total:number,tax:number,company_name: string,
-    vendor:string,purchased_at:string,vendor_address:string,customer_name:string,invoice_id:string
+    vendor:string,purchased_at:string,vendor_address:string,customer_name:string,invoice_id:string,spend_type:string
   ): Observable<{message: string}> {
     console.log("date: "+purchased_at);
     
@@ -115,6 +115,7 @@ export class ReceiptService {
     formData.append('vendor_address',vendor_address);
     formData.append('customer_name',customer_name);
     formData.append('invoice_id',invoice_id);
+    formData.append('spend_type',spend_type); 
 
     const url = `${this.apiUrl}${ApiConstants.POST_STORE_RECIPTS_AI_ASSISSTED}`;
 
