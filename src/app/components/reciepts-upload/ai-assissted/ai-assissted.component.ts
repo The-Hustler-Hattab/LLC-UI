@@ -75,7 +75,7 @@ export class AiAssisstedComponent {
         this.formData.company_name, this.formData.vendor,
         formattedDate, this.formData.vendor_address,
           this.formData.customer_name, this.formData.invoice_id,
-          this.formData.spendType)
+          this.formData.spendType, this.formData.sha256)
     .subscribe(
       (data: {message: string}) => {
       console.log(JSON.stringify(data.message));

@@ -124,6 +124,15 @@
     name="invoiceId"
     class="form-control"
   />
+  <label for="sha256" class="form-label" hidden>SHA 256</label>
+  <input
+    type="text"
+    id="sha256"
+    [(ngModel)]="formData.sha256"
+    name="sha256"
+    class="form-control"
+    hidden
+  />
   <div class="text-center">
     <button
       type="submit"
@@ -135,11 +144,14 @@
         formData.tax == null ||
         formData.company_name == null ||
         formData.customer_name == null ||
+        formData.spendType == null ||
         formData.vendor == '' ||
         formData.total == '' ||
         formData.sub_total == '' ||
         formData.company_name == '' ||
-        formData.customer_name == ''
+        formData.customer_name == '' ||
+        formData.spendType == '' 
+
       "
       (click)="storeReciept()"
     >

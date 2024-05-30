@@ -14,4 +14,5 @@ export interface Reciept {
     vendor: string;
     vendor_address: string;
     spend_type: string;
+    sha256: string;
   }
