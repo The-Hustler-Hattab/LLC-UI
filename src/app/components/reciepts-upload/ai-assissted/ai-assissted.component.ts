@@ -23,8 +23,7 @@ export class AiAssisstedComponent {
   spendTypes: string[] = ConstantsService.SPEND_TYPE;
 
   date: Date | undefined;
-  pdfSrc: SafeResourceUrl | null = null; // Use SafeResourceUrl for sanitized URLs
-
+  fileSrc: SafeResourceUrl | null = null; // Use SafeResourceUrl for sanitized URLs
 
   isSubmissionSuccessful: boolean = null;
   submitStatus: string = null;
@@ -33,15 +32,16 @@ export class AiAssisstedComponent {
   constructor(private recieptService: ReceiptService, private sanitizer: DomSanitizer) { } 
   onFilesSelected(event: any) {
     this.selectedFile = event.target.files[0]; 
-    if (this.selectedFile) {
-      this.pdfSrc = URL.createObjectURL(this.selectedFile); // Create a URL for the selected file
+    if (this.selectedFile ) {      
+      this.fileSrc = URL.createObjectURL(this.selectedFile); // Create a URL for the selected file
     }
+    
     const eventTarget = event.target as HTMLInputElement;
     const file: File | null = eventTarget.files ? eventTarget.files[0] : null;
 
     if (file) {
       const blobUrl = URL.createObjectURL(file);
-      this.pdfSrc = this.sanitizer.bypassSecurityTrustResourceUrl(blobUrl); // Sanitize the Blob URL
+      this.fileSrc = this.sanitizer.bypassSecurityTrustResourceUrl(blobUrl); // Sanitize the Blob URL
     }
   }
 
@@ -94,5 +94,9 @@ export class AiAssisstedComponent {
     this.isSubmissionSuccessful = null;
     this.uploaded = false;
     this.formData = null;
+  }
+
+  isPdf(){
+    return this.selectedFile.name.toLowerCase().endsWith('.pdf');
   }
 }

@@ -4,12 +4,12 @@
   <form (ngSubmit)="onSubmits(form)" #form="ngForm">
     <div class="form-group">
       <div>
-        <label for="formFileLg" class="form-label">PDF Receipt</label>
+        <label for="formFileLg" class="form-label">Receipt</label>
         <input
           class="form-control form-control-lg"
           type="file"
           id="pdfFile"
-          accept=".pdf"
+          accept=".pdf,.png,.jpeg,.jpg"
           (change)="onFilesSelected($event)"
         />
       </div>
@@ -159,7 +159,8 @@
     </button>
   </div>
   <hr />
-  <iframe *ngIf="pdfSrc" [src]="pdfSrc" class="pdf-iframe"></iframe>
+  <iframe *ngIf="fileSrc && isPdf() " [src]="fileSrc" class="pdf-iframe"></iframe>
+  <img *ngIf="fileSrc && !isPdf()" [src]="fileSrc" alt="no image detected">
 
   <app-result-box
     [isSuccessful]="isSubmissionSuccessful"

@@ -22,8 +22,8 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="pdfFile">Select PDF files:</label>
-            <input type="file" class="form-control-file" id="pdfFile" accept=".pdf" multiple (change)="onFilesSelected($event)">
+            <label for="pdfFile">Select Receipt files:</label>
+            <input type="file" class="form-control-file" id="pdfFile" accept=".pdf,.png,.jpeg,.jpg" multiple (change)="onFilesSelected($event)">
           </div>
           <div class="text-center">
             <button type="submit" class="btn btn-primary" [disabled]="selectedFiles.length === 0 
