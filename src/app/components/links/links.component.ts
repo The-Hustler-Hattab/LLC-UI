@@ -25,6 +25,19 @@ export class LinksComponent {
 
   ];
 
+  AlleghanyCountyLinks = [
+    { name: 'Real Estate Owner Search', url: 'https://www2.alleghenycounty.us/RealEstate/Search.aspx', image: 'assets/alleghany_county_tax.ico' },
+    { name: 'Court Records', url: 'https://dcr.alleghenycounty.us/Civil/LoginSearch.aspx', image: 'assets/court_record.png' },
+    { name: 'Property Records', url: 'https://pa_allegheny.uslandrecords.com/palr/', image: 'assets/AlleghenyLogo.jpg' },
+    { name: 'Sheriff Sale', url: 'https://sheriffalleghenycounty.com/sheriffs-sales/', image: 'assets/sherif_sale_ico.png' },
+  ];
+
+  PropertySearch = [
+    { name: 'Zillow', url: 'https://www.zillow.com/homes/', image: 'assets/zillow.svg' },
+    { name: 'Realtor', url: 'https://www.realtor.com/', image: 'assets/realtor.svg' },
+    { name: 'One Home', url: 'https://portal.onehome.com/en-US/properties/map?token=eyJPU04iOiJXRVNUUEVOTiIsImFnZW50aWQiOiIyMTAwMSIsInNldGlkIjogIjEwMjg3NTMiLCJzZXRUeXBlIjogIlBST1BFUlRZIiwic2F2ZWRTZWFyY2hJZCI6ICJmMjBkZjlhNC0yNGQ2LTM2MDItYTgyMS0yMDkwMGU2NWZmZmQiLCJlbWFpbCI6ICIiLCAiVmlld01vZGUiOiAiMyJ9&searchId=f20df9a4-24d6-3602-a821-20900e65fffd', image: 'assets/one_home.ico' },
+  ];
+
   constructor() { }
 
   ngOnInit(): void {
