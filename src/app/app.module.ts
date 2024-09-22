@@ -137,6 +137,8 @@ import { OKTA_CONFIG, OktaAuthModule } from '@okta/okta-angular';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { OktaAuth } from '@okta/okta-auth-js';
 import { LinksComponent } from './components/links/links.component';
+import { RowExpandTableComponent } from './components/sheriff-sale/row-expand-table/row-expand-table.component';
+import { SheriffSaleComponent } from './components/sheriff-sale/sheriff-sale.component';
 
 const oktaConfig = {
   issuer: 'https://dev-54597357.okta.com/oauth2/default',
@@ -167,7 +169,10 @@ const oktaAuth = new OktaAuth(oktaConfig);
     HorizontalChartComponent,
     FullAiComponent,
     AiAssisstedComponent,
-    LinksComponent
+    LinksComponent,
+    RowExpandTableComponent,
+    SheriffSaleComponent
+    
 
   ],
   imports: [

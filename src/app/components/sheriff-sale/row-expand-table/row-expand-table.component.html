@@ -1,0 +1,282 @@
+<div class="container">
+  <div class="card">
+    <p-toast></p-toast>
+    <!-- First Level: Products Table -->
+    <p-table
+      [value]="sheriffSaleData"
+      dataKey="id"
+      [tableStyle]="{ 'min-width': '150rem' }"
+      [expandedRowKeys]="expandedRows"
+      (onRowToggle)="expandedRows = $any($event)"
+      (onRowExpand)="onRowExpand($event)"
+      (onRowCollapse)="onRowCollapse($event)"
+
+    >
+      <ng-template pTemplate="caption">
+        <p-floatLabel>
+          <p-calendar
+            [(ngModel)]="rangeDates"
+            selectionMode="range"
+            [numberOfMonths]="1"
+            view="month"
+            dateFormat="mm/yy"
+            inputId="Date"
+            (onSelect)="onDateRangeSelect($event)"
+          />
+          <label for="Date">Search Date</label>
+        </p-floatLabel>
+
+        <div class="flex flex-wrap justify-content-end gap-2">
+
+          <button class="btn btn-danger" (click)="collapseAll()">
+            <i class="fas fa-minus"></i> Collapse All
+          </button>
+        </div>
+
+      </ng-template>
+
+      <!-- First Level Header -->
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 3rem"></th>
+          <th pSortableColumn="id">
+            ID <p-sortIcon field="id"></p-sortIcon>
+          </th>
+          <th pSortableColumn="file_hash">
+            File Hash <p-sortIcon field="file_hash"></p-sortIcon>
+          </th>
+          <th pSortableColumn="file_path">
+            File Path <p-sortIcon field="file_path"></p-sortIcon>
+          </th>
+          <th pSortableColumn="file_name">
+            File Name <p-sortIcon field="file_name"></p-sortIcon>
+          </th>
+          <th pSortableColumn="pages_size">
+            Pages Size <p-sortIcon field="pages_size"></p-sortIcon>
+          </th>
+          <th pSortableColumn="created_at">
+            Created At <p-sortIcon field="created_at"></p-sortIcon>
+          </th>
+          <th pSortableColumn="created_by">
+            Created By <p-sortIcon field="created_by"></p-sortIcon>
+          </th>
+          <th pSortableColumn="sheriff_sale_date">
+            Sheriff Sale Date <p-sortIcon field="sheriff_sale_date"></p-sortIcon>
+          </th>
+        </tr>
+      </ng-template>
+
+      <!-- First Level Body -->
+     <ng-template pTemplate="body" let-masterSale let-expanded=expanded>
+  <tr>
+    <td>
+      <button
+        class="btn btn-link p-0"
+        (click)="toggleRow(masterSale)"
+        pRipple
+      >
+        <i class="pi" [ngClass]="expanded ? 'pi-chevron-down' : 'pi-chevron-right'"></i>
+      </button>
+    </td>
+    <td>{{ masterSale.id }}</td>
+    <td>{{ masterSale.file_hash }}</td>
+    <td>{{ masterSale.file_path }}</td>
+    <td>{{ masterSale.file_name }}</td>
+    <td>{{ masterSale.pages_size }}</td>
+    <td>{{ masterSale.created_at | date: 'short' }}</td>
+    <td>{{ masterSale.created_by }}</td>
+    <td>{{ masterSale.sheriff_sale_date | date: 'short' }}</td>
+  </tr>
+      </ng-template>
+
+      <!-- First Level Row Expansion -->
+      <ng-template pTemplate="rowexpansion" let-sheriffSaleData>
+        <tr>
+          <td colspan="7">
+            <div class="p-3">
+              <!-- Second Level: Orders Table -->
+              <p-table
+                [value]="sheriffSaleData.sherif_sale_children"
+                dataKey="id"
+                [expandedRowKeys]="expandedRowsSecondLevel"
+                (onRowToggle)="expandedRowsSecondLevel = $any($event)"
+                [tableStyle]="{ 'min-width': '150rem' }"
+              >
+            
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th style="width: 3rem"></th>
+                    <th pSortableColumn="id">ID <p-sortIcon field="id"></p-sortIcon></th>
+                    <th pSortableColumn="sherif_sale_master_id">Master ID <p-sortIcon field="sherif_sale_master_id"></p-sortIcon></th>
+                    <th pSortableColumn="file_hash">File Hash <p-sortIcon field="file_hash"></p-sortIcon></th>
+                    <th pSortableColumn="file_path">File Path <p-sortIcon field="file_path"></p-sortIcon></th>
+                    <th pSortableColumn="file_name">File Name <p-sortIcon field="file_name"></p-sortIcon></th>
+                    <th pSortableColumn="created_at">Created At <p-sortIcon field="created_at"></p-sortIcon></th>
+                    <th pSortableColumn="created_by">Created By <p-sortIcon field="created_by"></p-sortIcon></th>
+                    <th pSortableColumn="sheriff_sale_date">Sheriff Sale Date <p-sortIcon field="sheriff_sale_date"></p-sortIcon></th>
+                  </tr>
+                </ng-template>
+
+                <!-- Second Level Body -->
+                <ng-template pTemplate="body" let-sheriffChild let-expanded="expanded">
+                  <tr>
+                    <td>
+                      <button
+                        class="btn btn-link p-0"
+                        (click)="toggleOrderRow(sheriffChild)"
+                        pRipple
+                      >
+                        <i class="pi" [ngClass]="expanded ? 'pi-chevron-down' : 'pi-chevron-right'"></i>
+                      </button>
+                    </td>
+                    <td>{{ sheriffChild.id }}</td>
+                    <td>{{ sheriffChild.sherif_sale_master_id }}</td>
+                    <td>{{ sheriffChild.file_hash }}</td>
+                    <td>{{ sheriffChild.file_path }}</td>
+                    <td>{{ sheriffChild.file_name }}</td>
+                    <td>{{ sheriffChild.created_at | date: 'short' }}</td>
+                    <td>{{ sheriffChild.created_by }}</td>
+                    <td>{{ sheriffChild.sheriff_sale_date | date: 'short' }}</td>
+                  </tr>
+                
+                </ng-template>
+
+                <!-- Second Level Row Expansion -->
+                <ng-template pTemplate="rowexpansion" let-sheriffSaleChild>
+                  <tr>
+                    <td colspan="7">
+                      <div class="p-3">
+                        <!-- Third Level: Items Table -->
+                        <p-table 
+                        [value]="sheriffSaleChild.sherif_sale_properties"
+                         dataKey="id"
+                         [tableStyle]="{ 'min-width': '800rem' }"
+
+                         >
+                          <!-- Third Level Header -->
+                          <ng-template pTemplate="header">
+                            <tr>
+                              <!-- Create a <th> for each property -->
+                              <th pSortableColumn="id">ID <p-sortIcon field="id"></p-sortIcon></th>
+                              <th pSortableColumn="sale">Sale <p-sortIcon field="sale"></p-sortIcon></th>
+                              <th pSortableColumn="case_number">Case Number <p-sortIcon field="case_number"></p-sortIcon></th>
+                              <th pSortableColumn="sale_type">Sale Type <p-sortIcon field="sale_type"></p-sortIcon></th>
+                              <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon></th>
+                              <th pSortableColumn="tracts">Tracts <p-sortIcon field="tracts"></p-sortIcon></th>
+                              <th pSortableColumn="cost_tax_bid">Cost/Tax Bid <p-sortIcon field="cost_tax_bid"></p-sortIcon></th>
+                              <th pSortableColumn="plaintiff">Plaintiff <p-sortIcon field="plaintiff"></p-sortIcon></th>
+                              <th pSortableColumn="attorney_for_plaintiff">Attorney for Plaintiff <p-sortIcon field="attorney_for_plaintiff"></p-sortIcon></th>
+                              <th pSortableColumn="defendant">Defendant <p-sortIcon field="defendant"></p-sortIcon></th>
+                              <th pSortableColumn="property_address">Property Address <p-sortIcon field="property_address"></p-sortIcon></th>
+                              <th pSortableColumn="municipality">Municipality <p-sortIcon field="municipality"></p-sortIcon></th>
+                              <th pSortableColumn="parcel_tax_id">Parcel Tax ID <p-sortIcon field="parcel_tax_id"></p-sortIcon></th>
+                              <th pSortableColumn="comments">Comments <p-sortIcon field="comments"></p-sortIcon></th>
+                              <th pSortableColumn="created_at">Created At <p-sortIcon field="created_at"></p-sortIcon></th>
+                              <th pSortableColumn="created_by">Created By <p-sortIcon field="created_by"></p-sortIcon></th>
+                              <th pSortableColumn="SHERIEF_SALE_CHILD_ID">Sherif Sale Child ID <p-sortIcon field="SHERIEF_SALE_CHILD_ID"></p-sortIcon></th>
+                              <th pSortableColumn="zillow_link">Zillow Link <p-sortIcon field="zillow_link"></p-sortIcon></th>
+                              <th pSortableColumn="zestimate">Zestimate <p-sortIcon field="zestimate"></p-sortIcon></th>
+                              <th pSortableColumn="zestibuck">Zestibuck <p-sortIcon field="zestibuck"></p-sortIcon></th>
+                              <th pSortableColumn="events">Events <p-sortIcon field="events"></p-sortIcon></th>
+                              <th pSortableColumn="schools">Schools <p-sortIcon field="schools"></p-sortIcon></th>
+                              <th pSortableColumn="year_built">Year Built <p-sortIcon field="year_built"></p-sortIcon></th>
+                              <th pSortableColumn="lot_size">Lot Size <p-sortIcon field="lot_size"></p-sortIcon></th>
+                              <th pSortableColumn="square_foot_range">Square Foot Range <p-sortIcon field="square_foot_range"></p-sortIcon></th>
+                              <th pSortableColumn="square_foot">Square Foot <p-sortIcon field="square_foot"></p-sortIcon></th>
+                              <th pSortableColumn="bedrooms">Bedrooms <p-sortIcon field="bedrooms"></p-sortIcon></th>
+                              <th pSortableColumn="bathrooms">Bathrooms <p-sortIcon field="bathrooms"></p-sortIcon></th>
+                              <th pSortableColumn="home_type">Home Type <p-sortIcon field="home_type"></p-sortIcon></th>
+                              <th pSortableColumn="heating">Heating <p-sortIcon field="heating"></p-sortIcon></th>
+                              <th pSortableColumn="cooling">Cooling <p-sortIcon field="cooling"></p-sortIcon></th>
+                              <th pSortableColumn="parking">Parking <p-sortIcon field="parking"></p-sortIcon></th>
+                              <th pSortableColumn="exterior">Exterior <p-sortIcon field="exterior"></p-sortIcon></th>
+                              <th pSortableColumn="parcel_num">Parcel Num <p-sortIcon field="parcel_num"></p-sortIcon></th>
+                              <th pSortableColumn="construction_materials">Construction Materials <p-sortIcon field="construction_materials"></p-sortIcon></th>
+                              <th pSortableColumn="roof">Roof <p-sortIcon field="roof"></p-sortIcon></th>
+                              <th pSortableColumn="street">Street <p-sortIcon field="street"></p-sortIcon></th>
+                              <th pSortableColumn="city">City <p-sortIcon field="city"></p-sortIcon></th>
+                              <th pSortableColumn="state">State <p-sortIcon field="state"></p-sortIcon></th>
+                              <th pSortableColumn="zip">Zip <p-sortIcon field="zip"></p-sortIcon></th>
+                              <th pSortableColumn="county">County <p-sortIcon field="county"></p-sortIcon></th>
+                              <th pSortableColumn="amount_in_dispute">Amount in Dispute <p-sortIcon field="amount_in_dispute"></p-sortIcon></th>
+                            </tr>
+                          </ng-template>
+                          
+                          <!-- Body Template -->
+                          <ng-template pTemplate="body" let-item let-expanded="expanded">
+                            <tr>
+                              
+                              <td>{{ item.id }}</td>
+                              <td>{{ item.sale }}</td>
+                              <td>{{ item.case_number }}</td>
+                              <td>{{ item.sale_type }}</td>
+                              <td>{{ item.status }}</td>
+                              <td>{{ item.tracts }}</td>
+                              <td>{{ item.cost_tax_bid }}</td>
+                              <td>{{ item.plaintiff }}</td>
+                              <td>{{ item.attorney_for_plaintiff }}</td>
+                              <td>{{ item.defendant }}</td>
+                              <td>{{ item.property_address }}</td>
+                              <td>{{ item.municipality }}</td>
+                              <td>{{ item.parcel_tax_id }}</td>
+                              <td>{{ item.comments }}</td>
+                              <td>{{ item.created_at | date:'short' }}</td>
+                              <td>{{ item.created_by }}</td>
+                              <td>{{ item.SHERIEF_SALE_CHILD_ID }}</td>
+                              <td>
+                                <!-- Display Zillow Link as a clickable hyperlink -->
+                                <a [href]="item.zillow_link" target="_blank" style="color: blue;">{{ item.zillow_link }}</a>
+                              </td>
+                              <td>{{ item.Zestimate}}</td>
+                              <td>{{ item.zestibuck }}</td>
+                              <td>{{ item.events }}</td>
+                              <td>{{ item.schools }}</td>
+                              <td>{{ item.year_built }}</td>
+                              <td>{{ item.lot_size }}</td>
+                              <td>{{ item.square_foot_range }}</td>
+                              <td>{{ item.square_foot }}</td>
+                              <td>{{ item.bedrooms }}</td>
+                              <td>{{ item.bathrooms }}</td>
+                              <td>{{ item.home_type }}</td>
+                              <td>{{ item.heating }}</td>
+                              <td>{{ item.cooling }}</td>
+                              <td>{{ item.parking }}</td>
+                              <td>{{ item.exterior }}</td>
+                              <td>{{ item.parcel_num }}</td>
+                              <td>{{ item.construction_materials }}</td>
+                              <td>{{ item.roof }}</td>
+                              <td>{{ item.street }}</td>
+                              <td>{{ item.city }}</td>
+                              <td>{{ item.state }}</td>
+                              <td>{{ item.zip }}</td>
+                              <td>{{ item.county }}</td>
+                              <td>{{ item.amount_in_dispute}}</td>
+                            </tr>
+                          </ng-template>
+
+                          <!-- Third Level Empty Message -->
+                          <ng-template pTemplate="emptymessage">
+                            <tr>
+                              <td colspan="4">No items found for this order.</td>
+                            </tr>
+                          </ng-template>
+                        </p-table>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-template>
+
+                <!-- Second Level Empty Message -->
+                <ng-template pTemplate="emptymessage">
+                  <tr>
+                    <td colspan="7">There are no orders for this product yet.</td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

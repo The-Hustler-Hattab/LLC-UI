@@ -13,13 +13,16 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/reciepts-upload" *ngIf="(authService.authState$ | async)?.isAuthenticated">Process Reciept</a>
+          <a class="nav-link" routerLinkActive="active" routerLink="/reciepts-upload" *ngIf="(authService.authState$ | async)?.isAuthenticated">Process Receipt</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/reciepts" *ngIf="(authService.authState$ | async)?.isAuthenticated">Reciept Files</a>
+          <a class="nav-link" routerLinkActive="active" routerLink="/reciepts" *ngIf="(authService.authState$ | async)?.isAuthenticated">Receipt Files</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/reciepts-table" *ngIf="(authService.authState$ | async)?.isAuthenticated">Reciept Table</a>
+          <a class="nav-link" routerLinkActive="active" routerLink="/reciepts-table" *ngIf="(authService.authState$ | async)?.isAuthenticated">Receipt Table</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="/sheriff-sale" *ngIf="(authService.authState$ | async)?.isAuthenticated">Sheriff Sale</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLinkActive="active" routerLink="/links" *ngIf="(authService.authState$ | async)?.isAuthenticated">Links</a>
