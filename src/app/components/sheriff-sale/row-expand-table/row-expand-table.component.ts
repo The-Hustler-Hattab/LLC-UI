@@ -11,6 +11,7 @@ import { UtilsService } from 'src/app/services/utils.service';
   styleUrl: './row-expand-table.component.scss',
 })
 export class RowExpandTableComponent {
+
   sheriffSaleData: MasterSherifSale[] = [];
 
   expandedRows: { [key: string]: boolean } = {};
@@ -163,6 +164,20 @@ export class RowExpandTableComponent {
       this.sheriffSaleService.getSheriffData(start_time, end_time);
     }
   }
+
+  downloadPDF(filePath: string) {
+    console.log(filePath);
+    this.sheriffSaleService.downloadPdfFile(filePath);
+  }
+
+  downloadXlsx(id: number) {
+    console.log(id);
+    this.sheriffSaleService.downloadXlsxFile(id);
+  }
+  refresh() {
+    this.sheriffSaleService.getDefaultData();
+  }
+
 }
   
 

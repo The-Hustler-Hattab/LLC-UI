@@ -3,6 +3,7 @@ import { SheriffSaleApiService } from '../sheriff-sale-api.service';
 import { MasterSherifSale } from 'src/app/models/sheriff-sale/master.model';
 import { Subject } from 'rxjs/internal/Subject';
 import { UtilsService } from '../utils.service';
+import { FilesService } from '../azure-blob/files.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,12 @@ export class SheriffSaleService {
   
   
   constructor(private sheriffSaleApi : SheriffSaleApiService ) {
-    this.getSheriffData(UtilsService.getFirstDayOfYear(), UtilsService.getLastDayOfYear());
+    this.getDefaultData();
    }
+
+   public getDefaultData() {
+    this.getSheriffData(UtilsService.getFirstDayOfYear(), UtilsService.getLastDayOfYear());
+  }
 
    public getSheriffData(start_date, end_date) {
     this.sheriffSaleApi.getSheriffSaleDataBetweenTwoDates(start_date,end_date)
@@ -24,6 +29,20 @@ export class SheriffSaleService {
       this.sheriffSaleDataSubject.next(this.sheriffSaleData); 
     });
   }
+  downloadPdfFile(file_path: string) {
+    this.sheriffSaleApi.getSheriffFileBlob(file_path).subscribe(
+      (blob: Blob) => {
+        FilesService.saveFile(blob, file_path);
+      }
+    );
+  }
 
+  downloadXlsxFile(id) {
+    this.sheriffSaleApi.getSheriffFileXLSXBlob(id).subscribe(
+      (blob: Blob) => {
+        FilesService.saveFile(blob, "sheriff-sale.xlsx");
+      }
+    );
+  }
 
 }

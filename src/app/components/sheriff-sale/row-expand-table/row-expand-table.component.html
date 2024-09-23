@@ -31,6 +31,9 @@
           <button class="btn btn-danger" (click)="collapseAll()">
             <i class="fas fa-minus"></i> Collapse All
           </button>
+          <button class="btn btn-warning" (click)="refresh()">
+            <i class="fas fa-sync-alt"></i> Refresh
+          </button>
         </div>
 
       </ng-template>
@@ -63,6 +66,8 @@
           <th pSortableColumn="sheriff_sale_date">
             Sheriff Sale Date <p-sortIcon field="sheriff_sale_date"></p-sortIcon>
           </th>
+          <th></th>
+
         </tr>
       </ng-template>
 
@@ -86,6 +91,32 @@
     <td>{{ masterSale.created_at | date: 'short' }}</td>
     <td>{{ masterSale.created_by }}</td>
     <td>{{ masterSale.sheriff_sale_date | date: 'short' }}</td>
+    <td>
+
+      <div class="row">
+        <div class="col-md-4">
+          <button
+          type="button"
+          class="btn btn-success mr-2"
+          (click)="downloadXlsx(masterSale.id)"
+          >
+          <i class="fas fa-file-excel"></i> XLSX
+        </button>
+        </div>
+  
+        <div class="col-md-1">
+          <button
+          type="button"
+          class="btn btn-danger mr-2"
+          (click)="downloadPDF(masterSale.file_path)"
+          >
+          
+          <i class="fas fa-file-pdf"></i> PDF
+        </button>
+        </div>
+      </div>
+ 
+    </td>
   </tr>
       </ng-template>
 
