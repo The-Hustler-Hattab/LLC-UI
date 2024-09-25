@@ -11,16 +11,15 @@
         <li class="nav-item">
           <a class="nav-link" routerLinkActive="active" routerLink="/analytics" *ngIf="(authService.authState$ | async)?.isAuthenticated">Analytics</a>
         </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" *ngIf="(authService.authState$ | async)?.isAuthenticated">Receipts</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" routerLink="/reciepts-upload">Process Receipt</a>
+            <a class="dropdown-item"  routerLink="/reciepts" >Receipt Files</a>
+            <a class="dropdown-item"routerLink="/reciepts-table">Receipt Table</a>
+          </div>
+        </li>
 
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/reciepts-upload" *ngIf="(authService.authState$ | async)?.isAuthenticated">Process Receipt</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/reciepts" *ngIf="(authService.authState$ | async)?.isAuthenticated">Receipt Files</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/reciepts-table" *ngIf="(authService.authState$ | async)?.isAuthenticated">Receipt Table</a>
-        </li>
         <li class="nav-item">
           <a class="nav-link" routerLinkActive="active" routerLink="/sheriff-sale" *ngIf="(authService.authState$ | async)?.isAuthenticated">Sheriff Sale</a>
         </li>
@@ -35,7 +34,6 @@
           <a class="nav-link" routerLinkActive="active" routerLink="/about">About</a>
         </li>
         
-        <!-- <ul class="navbar-nav ml-auto mt-2 mt-lg-0"> -->
           <li class="nav-item ">
               <a class="nav-link "
               *ngIf="(authService.authState$ | async)?.isAuthenticated" (click)="logout()" style="cursor:pointer">Log out</a>
@@ -44,14 +42,7 @@
               <a class="nav-link" 
               *ngIf="!(authService.authState$ | async)?.isAuthenticated" (click)="login()" style="cursor:pointer">Log in</a>
           </li>
-<!-- 
-          <li class="nav-item active">
-              <a class="nav-link" 
-               (click)="print()" href="#">print</a>
-          </li> -->
 
-          
-      <!-- </ul> -->
       </ul>
     </div>
   </nav>
