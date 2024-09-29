@@ -11,6 +11,7 @@ import { ContactComponent } from './components/contact/contact.component';
 import { OktaCallbackComponent } from '@okta/okta-angular';
 import { LinksComponent } from './components/links/links.component';
 import { SheriffSaleComponent } from './components/sheriff-sale/sheriff-sale.component';
+import { IncomeComponent } from './components/income/income.component';
 
 const routes: Routes = [
   {path:"home", component: HomeComponent},
@@ -23,6 +24,8 @@ const routes: Routes = [
   {path:"contact", component: ContactComponent},
   {path:"links", component: LinksComponent},
   {path:"sheriff-sale", component: SheriffSaleComponent},
+  {path:"income", component: IncomeComponent},
+
   {path: 'callback', component: OktaCallbackComponent},
 
   {path: 'page-not-found', component: PageNotFoundComponent},

@@ -21,6 +21,9 @@
         </li>
 
         <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="/income" *ngIf="(authService.authState$ | async)?.isAuthenticated">Income</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" routerLinkActive="active" routerLink="/sheriff-sale" *ngIf="(authService.authState$ | async)?.isAuthenticated">Sheriff Sale</a>
         </li>
         <li class="nav-item">

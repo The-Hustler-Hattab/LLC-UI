@@ -139,6 +139,7 @@ import { OktaAuth } from '@okta/okta-auth-js';
 import { LinksComponent } from './components/links/links.component';
 import { RowExpandTableComponent } from './components/sheriff-sale/row-expand-table/row-expand-table.component';
 import { SheriffSaleComponent } from './components/sheriff-sale/sheriff-sale.component';
+import { IncomeComponent } from './components/income/income.component';
 
 const oktaConfig = {
   issuer: 'https://dev-54597357.okta.com/oauth2/default',
@@ -171,7 +172,9 @@ const oktaAuth = new OktaAuth(oktaConfig);
     AiAssisstedComponent,
     LinksComponent,
     RowExpandTableComponent,
-    SheriffSaleComponent
+    SheriffSaleComponent,
+    IncomeComponent
+
     
 
   ],

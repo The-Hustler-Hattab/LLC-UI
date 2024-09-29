@@ -1,0 +1,55 @@
+<div class="container mt-5">
+    <h1>Income Information Form</h1>
+    <form (ngSubmit)="onSubmits(form)" #form="ngForm">
+      
+      <div class="form-group">
+        <label for="source">Source*</label>
+        <select class="form-control" id="source" ngModel name="source" >
+          <option *ngFor="let type of incomeType" [value]="type">{{ type }}</option>
+        </select>
+      </div>
+      <!-- Income Amount Field -->
+      <div class="mb-3">
+        <label for="grossRevenue" class="form-label">Gross Revenue*</label>
+        <input type="number" class="form-control" id="grossRevenue" name="grossRevenue" ngModel placeholder="Enter amount" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="netRevenue" class="form-label">Net Revenue*</label>
+        <input type="number" class="form-control" id="netRevenue" name="netRevenue" ngModel placeholder="Enter amount" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="tax" class="form-label">Tax*</label>
+        <input type="number" class="form-control" id="tax" name="tax" ngModel placeholder="Enter amount" required>
+      </div>
+  
+      <!-- Comment Field -->
+      <div class="mb-3">
+        <label for="comment" class="form-label">Comment</label>
+        <textarea class="form-control" id="comment" name="comment" ngModel rows="3" placeholder="Add any additional details"></textarea>
+      </div>
+  
+      <!-- Proof File Field (Optional) -->
+      <div class="mb-3">
+        <label for="proofFile" class="form-label">Proof of Income</label>
+        <input type="file" class="form-control" id="proofFile" name="proofFile" ngModel
+          (change)="onFilesSelected($event)"
+        >
+      </div>
+  
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary" 
+      [disabled]="form.value.source === '' || 
+            form.value.grossRevenue === '' || form.value.netRevenue === ''
+            || form.value.tax === ''"
+      >Submit</button>
+    </form>
+
+
+  </div>
+  <app-result-box
+  [isSuccessful]="isSubmissionSuccessful"
+  [message]="submitStatus"
+  (closed)="clearSubmitStatus()"
+></app-result-box>
