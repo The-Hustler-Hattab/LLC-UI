@@ -23,7 +23,22 @@
         <label for="tax" class="form-label">Tax*</label>
         <input type="number" class="form-control" id="tax" name="tax" ngModel placeholder="Enter amount" required>
       </div>
-  
+      
+      <div class="flex-auto">
+        <label for="receivedAt" class="font-bold block mb-2">Received At*</label>
+
+        <p-calendar
+        [(ngModel)]="receivedAt"
+        inputId="receivedAt"
+        id="receivedAt"
+        name="receivedAt"
+        dateFormat="yy-mm-dd"
+        class="form-control"
+        [showIcon]="true" 
+      />
+
+
+      </div>
       <!-- Comment Field -->
       <div class="mb-3">
         <label for="comment" class="form-label">Comment</label>
@@ -40,9 +55,7 @@
   
       <!-- Submit Button -->
       <button type="submit" class="btn btn-primary" 
-      [disabled]="form.value.source === '' || 
-            form.value.grossRevenue === '' || form.value.netRevenue === ''
-            || form.value.tax === ''"
+      [disabled]="isValid(form)"
       >Submit</button>
     </form>
 

@@ -12,6 +12,7 @@ import { IncomeApiServiceService } from 'src/app/services/income-api-service.ser
 export class IncomeComponent {
   selectedFile: File;
   incomeType: string[] = ConstantsService.INCOME_TYPE;
+  receivedAt: Date | undefined;
 
   isSubmissionSuccessful: boolean = null;
   submitStatus: string = null;
@@ -29,7 +30,7 @@ export class IncomeComponent {
       form.value.grossRevenue,
        form.value.netRevenue,
         form.value.tax,
-         form.value.comment,this.selectedFile).subscribe( 
+         form.value.comment, this.receivedAt.toLocaleDateString('en-CA')  ,this.selectedFile).subscribe( 
               (data: {message: string}) => {
           console.log(JSON.stringify(data.message));
           this.isSubmissionSuccessful = true;
@@ -50,6 +51,15 @@ export class IncomeComponent {
   clearSubmitStatus() {
     this.submitStatus = null;
     this.isSubmissionSuccessful = null;
+  }
+
+  isValid(form: NgForm): boolean {
+
+    
+    
+    return form.value.source === '' || 
+            form.value.grossRevenue === '' || form.value.netRevenue === ''
+            || form.value.tax === '' || this.receivedAt== undefined;
   }
 
 

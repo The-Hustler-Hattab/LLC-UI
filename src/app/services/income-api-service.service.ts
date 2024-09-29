@@ -21,7 +21,7 @@ export class IncomeApiServiceService {
 
 
   storeIncome(source: string,grossRevenue: number,
-    netRevenue: number, tax: number, comment: string,file?: File): Observable<{message: string}> {
+    netRevenue: number, tax: number, comment: string, receivedAt: string ,file?: File): Observable<{message: string}> {
     
     const formData = new FormData();
     if(file != null){
@@ -34,6 +34,7 @@ export class IncomeApiServiceService {
     formData.append('net_revenue', netRevenue.toString());
     formData.append('tax', tax.toString());
     formData.append('comment', comment);
+    formData.append('received_at', receivedAt);
 
     const url = `${this.apiUrl}${ApiConstants.STORE_INCOME}`;
     return this.http.post<{message: string}>(url, formData);
