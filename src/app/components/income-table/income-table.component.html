@@ -1,0 +1,165 @@
+<div class="container">
+  <div class="card">
+    <p-table
+      #dt1
+      [value]="income"
+      [reorderableColumns]="false" 
+
+      [globalFilterFields]="[
+        'id',
+        'source',
+        'gross_revenue',
+        'tax',
+        'net_revenue',
+        'comment',
+        'proof_of_income_file_path',
+        'created_at',
+        'created_by',
+        'received_at',
+
+      ]"
+      selectionMode="single"
+      [(selection)]="selectedIncome"
+      dataKey="id"
+      [tableStyle]="{ 'min-width': '80rem' }"
+      [rows]="50"
+      [rowsPerPageOptions]="[5, 10, 20, 50, 100, 500]"
+      [paginator]="true"
+      stateStorage="session"
+      [resizableColumns]="false" 
+      [tableStyle]="{'min-width': '50rem'}"
+      stateKey="statedemo-session"
+    >
+      <ng-template pTemplate="caption">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="search-addon">
+                        <i class="pi pi-search"></i>
+                      </span>
+                    </div>
+                    <input
+                      #globalFilterInput
+                      type="text"
+                      class="form-control"
+                      placeholder="Global Search"
+                      aria-label="Search"
+                      aria-describedby="search-addon"
+                      (input)="dt1.filterGlobal(globalFilterInput.value, 'contains')"
+                    />
+                  </div>
+            </div>
+            <div class="col-md-3">
+              <button type="button" class="btn btn-warning" (click)="refreshIncome()">
+                <i class="fas fa-sync-alt"></i>
+              </button>
+            </div>
+        </div>
+        
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="id" pResizableColumn pReorderableColumn>
+            Id <p-sortIcon field="id" />
+          </th>
+          <th pSortableColumn="source" pResizableColumn pReorderableColumn style="width:10rem">
+            Source <p-sortIcon field="source" />
+          </th>
+          <th pSortableColumn="gross_revenue" pResizableColumn pReorderableColumn style="width:2rem">
+            Gross Revenue <p-sortIcon field="gross_revenue" />
+          </th>
+          <th pSortableColumn="net_revenue" pResizableColumn pReorderableColumn style="width:2rem">
+            Net Revenue <p-sortIcon field="net_revenue" />
+          </th>
+          <th pSortableColumn="tax" pResizableColumn pReorderableColumn style="width:2rem">
+            Tax <p-sortIcon field="tax" />
+          </th>
+          <th pSortableColumn="received_at" pResizableColumn pReorderableColumn style="width:10rem">
+            Received At<p-sortIcon field="received_at" />
+          </th>
+          <th pSortableColumn="comment" pResizableColumn pReorderableColumn style="width:10rem">
+            Comment <p-sortIcon field="comment" />
+          </th>
+          <th pSortableColumn="proof_of_income_file_path" pResizableColumn pReorderableColumn style="width:10rem">
+            Proof Of Income File <p-sortIcon field="proof_of_income_file_path" />
+          </th>
+          <th pSortableColumn="created_at" pResizableColumn pReorderableColumn style="width:10rem">
+            Created At<p-sortIcon field="created_at" />
+          </th>
+          <th pSortableColumn="created_by" pResizableColumn pReorderableColumn style="width:10rem">
+            Created By<p-sortIcon field="created_by" />
+          </th>
+          <!-- <th ></th> -->
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-income
+      let-index="rowIndex">
+
+      
+        <tr [pSelectableRow]="income" [pReorderableRow]="index">
+          <td>
+            <span class="p-column-title" >id</span>
+            {{ income.id }}
+          </td>
+          <td>
+            <span class="p-column-title" >source</span>
+                {{income.source}}
+          </td>
+          <td>
+            <span class="p-column-title" >gross_revenue</span>
+            {{income.gross_revenue}}
+          </td>
+          <td>
+            <span class="p-column-title" >net_revenue</span>
+            {{income.net_revenue}}
+          </td>
+          <td>
+            <span class="p-column-title" >tax</span>
+            {{income.tax}}
+          </td>
+          <td>
+            <span class="p-column-title" >received_at</span>
+            {{income.received_at}}
+          </td>
+          <td>
+            <span class="p-column-title" >comment</span>
+            {{income.comment}}
+          </td>
+          <td>
+            <span class="p-column-title" >proof_of_income_file_path</span>
+            {{income.proof_of_income_file_path}}
+          </td>
+          <td>
+            <span class="p-column-title" >created_at</span>
+            {{income.created_at}}
+          </td>
+          <td>
+            <span class="p-column-title" >created_by</span>
+            {{income.created_by}}
+          </td>
+          <td >
+          <button type="button" class="btn btn-info" (click)="download(income.proof_of_income_file_path)"
+           *ngIf="income.proof_of_income_file_path" >
+            <i class="fas fa-download"></i>
+          </button>
+          <button type="button" class="btn btn-danger" (click)="delete(income.id)" >
+            <i class="fas fa-trash-alt"></i>
+          </button>
+          </td>
+        </tr>
+      </ng-template>
+     
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="4">No Income found.</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+<app-result-box
+[isSuccessful]="isSubmissionSuccessful"
+[message]="submitStatus"
+(closed)="clearSubmitStatus()"
+></app-result-box>

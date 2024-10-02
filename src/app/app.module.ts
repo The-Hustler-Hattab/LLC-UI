@@ -140,6 +140,18 @@ import { LinksComponent } from './components/links/links.component';
 import { RowExpandTableComponent } from './components/sheriff-sale/row-expand-table/row-expand-table.component';
 import { SheriffSaleComponent } from './components/sheriff-sale/sheriff-sale.component';
 import { IncomeComponent } from './components/income/income.component';
+import { IncomeTableComponent } from './components/income-table/income-table.component';
+import { InputIconModule } from 'primeng/inputicon';
+import { IconFieldModule } from 'primeng/iconfield';
+
+
+
+
+
+
+
+
+
 
 const oktaConfig = {
   issuer: 'https://dev-54597357.okta.com/oauth2/default',
@@ -173,7 +185,8 @@ const oktaAuth = new OktaAuth(oktaConfig);
     LinksComponent,
     RowExpandTableComponent,
     SheriffSaleComponent,
-    IncomeComponent
+    IncomeComponent,
+    IncomeTableComponent
 
     
 
@@ -294,6 +307,8 @@ const oktaAuth = new OktaAuth(oktaConfig);
     OAuthModule.forRoot(),
     OktaAuthModule,
     CommonModule,
+    InputIconModule,
+    IconFieldModule
     
   ],
   providers: [

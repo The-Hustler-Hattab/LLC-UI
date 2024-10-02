@@ -2,10 +2,16 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { LLCIncome } from '../models/llc-income.model';
 
 
 export const ApiConstants = {
-  STORE_INCOME: '/store-income'
+  STORE_INCOME: '/store-income',
+  GET_ALL_INCOME: '/get-all-income',
+  DELETE_INCOME: '/delete-income',
+  GET_INCOME_FILE: '/get-income-file'
+
+
 }
 
 @Injectable({
@@ -38,6 +44,24 @@ export class IncomeApiServiceService {
 
     const url = `${this.apiUrl}${ApiConstants.STORE_INCOME}`;
     return this.http.post<{message: string}>(url, formData);
+  }
+
+
+
+  getAllIncome(): Observable<{message: string, income: LLCIncome[]}> {
+    const url = `${this.apiUrl}${ApiConstants.GET_ALL_INCOME}`;
+    
+    return this.http.get<{message: string, income: LLCIncome[]}>(url);
+  }
+
+  deleteIncome(id: number): Observable<{message: string}> {
+    const url = `${this.apiUrl}${ApiConstants.DELETE_INCOME}?id=${id}`;
+    return this.http.delete<{message: string}>(url);
+  }
+
+  getIncomeFile(filePath: string): Observable<Blob> {
+    const url = `${this.apiUrl}${ApiConstants.GET_INCOME_FILE}?path=${filePath}`;
+    return this.http.get(url, {responseType: 'blob'});
   }
 
 
