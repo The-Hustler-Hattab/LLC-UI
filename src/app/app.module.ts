@@ -144,6 +144,8 @@ import { IncomeTableComponent } from './components/income-table/income-table.com
 import { InputIconModule } from 'primeng/inputicon';
 import { IconFieldModule } from 'primeng/iconfield';
 
+import { NgxPlaidLinkModule } from "ngx-plaid-link";
+import { PlaidComponent } from './components/plaid/plaid.component';
 
 
 
@@ -186,13 +188,15 @@ const oktaAuth = new OktaAuth(oktaConfig);
     RowExpandTableComponent,
     SheriffSaleComponent,
     IncomeComponent,
-    IncomeTableComponent
+    IncomeTableComponent,
+    PlaidComponent
 
     
 
   ],
   imports: [
     BrowserModule,
+    NgxPlaidLinkModule, 
     AppRoutingModule,
     BrowserAnimationsModule,
     MatProgressSpinnerModule,

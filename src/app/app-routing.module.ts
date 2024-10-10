@@ -13,6 +13,7 @@ import { LinksComponent } from './components/links/links.component';
 import { SheriffSaleComponent } from './components/sheriff-sale/sheriff-sale.component';
 import { IncomeComponent } from './components/income/income.component';
 import { IncomeTableComponent } from './components/income-table/income-table.component';
+import { PlaidComponent } from './components/plaid/plaid.component';
 
 const routes: Routes = [
   {path:"home", component: HomeComponent},
@@ -27,6 +28,8 @@ const routes: Routes = [
   {path:"sheriff-sale", component: SheriffSaleComponent},
   {path:"income", component: IncomeComponent},
   {path:"income-table", component: IncomeTableComponent},
+  {path:"plaid", component: PlaidComponent},
+
   {path: 'callback', component: OktaCallbackComponent},
 
   {path: 'page-not-found', component: PageNotFoundComponent},

@@ -22,7 +22,6 @@ export class UtilsService {
   }
 
   static onDateRangeSelect( rangeDates: Date[] | undefined ) : string[] | undefined {
-    console.log(rangeDates);
     if (rangeDates!=undefined && rangeDates.length == 2) {
       let endDate = rangeDates[1]; // Second date in the range
       endDate = this.getLastDayOfMonth(endDate); // Convert to last day of the month
