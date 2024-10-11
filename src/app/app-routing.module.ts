@@ -14,6 +14,7 @@ import { SheriffSaleComponent } from './components/sheriff-sale/sheriff-sale.com
 import { IncomeComponent } from './components/income/income.component';
 import { IncomeTableComponent } from './components/income-table/income-table.component';
 import { PlaidComponent } from './components/plaid/plaid.component';
+import { ManageBankComponent } from './components/manage-bank/manage-bank.component';
 
 const routes: Routes = [
   {path:"home", component: HomeComponent},
@@ -29,6 +30,8 @@ const routes: Routes = [
   {path:"income", component: IncomeComponent},
   {path:"income-table", component: IncomeTableComponent},
   {path:"plaid", component: PlaidComponent},
+  {path:"manage-bank", component: ManageBankComponent},
+
 
   {path: 'callback', component: OktaCallbackComponent},
 

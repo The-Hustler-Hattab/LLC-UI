@@ -4,11 +4,9 @@ import { ReceiptService } from 'src/app/services/receipt.service';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FilesService } from 'src/app/services/azure-blob/files.service';
+import { Column } from 'src/app/models/column.model';
 
-export interface Column {
-  field: string;
-  header: string;
-}
+
 
 @Component({
   selector: 'app-receipt-files',

@@ -146,6 +146,7 @@ import { IconFieldModule } from 'primeng/iconfield';
 
 import { NgxPlaidLinkModule } from "ngx-plaid-link";
 import { PlaidComponent } from './components/plaid/plaid.component';
+import { ManageBankComponent } from './components/manage-bank/manage-bank.component';
 
 
 
@@ -189,7 +190,8 @@ const oktaAuth = new OktaAuth(oktaConfig);
     SheriffSaleComponent,
     IncomeComponent,
     IncomeTableComponent,
-    PlaidComponent
+    PlaidComponent,
+    ManageBankComponent
 
     
 

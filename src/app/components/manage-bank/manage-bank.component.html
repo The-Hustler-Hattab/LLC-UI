@@ -1,0 +1,89 @@
+<div class="container">
+    <div class="card mt-8">
+        <p-table [value]="banks" 
+        #dt1
+
+        [tableStyle]="{'min-width': '50rem'}"
+        [rowsPerPageOptions]="[5, 10, 20]"
+        [rows]="10"
+        [paginator]="true"
+        [globalFilterFields]="[
+        'id',
+        'institution_id',
+        'institution_name',
+        'created_at',
+        'created_by',
+
+      ]"
+        >
+        <ng-template pTemplate="caption">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="search-addon">
+                            <i class="pi pi-search"></i>
+                          </span>
+                        </div>
+                        <input
+                          #globalFilterInput
+                          type="text"
+                          class="form-control"
+                          placeholder="Global Search"
+                          aria-label="Search"
+                          aria-describedby="search-addon"
+                          (input)="dt1.filterGlobal(globalFilterInput.value, 'contains')"
+                        />
+                      </div>
+                </div>
+                <div class="col-md-3">
+                  <button type="button" class="btn btn-warning" (click)="refresh()">
+                    <i class="fas fa-sync-alt"></i>
+                  </button>
+                </div>
+            </div>
+          </ng-template>
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th pSortableColumn="id">ID <p-sortIcon field="id" /></th>
+                    <th pSortableColumn="institution_name">Institution Name<p-sortIcon field="institution_name" /></th>
+                    <th pSortableColumn="institution_id">Institution ID<p-sortIcon field="institution_id" /></th>
+                    <th pSortableColumn="created_at">Created At<p-sortIcon field="created_at" /></th>
+                    <th pSortableColumn="created_by">Created By<p-sortIcon field="created_by" /></th>
+                    <th>Actions</th>
+
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-bank let-columns="columns">
+                <tr>
+                    <td>
+                        {{bank.id}}
+                    </td>
+                    <td>
+                        {{bank.institution_name }}
+                    </td>
+                    <td>
+                        {{bank.institution_id}}
+                    </td>
+                    <td>
+                        {{bank.created_at}}
+                    </td>
+                    <td>
+                        {{bank.created_by}}
+                    </td>
+                    <td>
+                        <button pButton type="button" 
+                        icon="pi pi-trash" 
+                        class="p-button-rounded btn-danger"
+                        (click)="deleteBank(bank.id)"></button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+<app-result-box
+  [isSuccessful]="isSubmissionSuccessful"
+  [message]="submitStatus"
+  (closed)="clearSubmitStatus()"
+></app-result-box>

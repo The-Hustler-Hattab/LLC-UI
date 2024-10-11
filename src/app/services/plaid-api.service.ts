@@ -10,6 +10,7 @@ export const ApiConstants = {
   CREATE_EXCHANGE_TOKEN: '/exchange-public-token',
   GET_ALL_BANKS: '/get-all-banks',
   GET_TRANSACTIONS: '/get-transactions',
+  DELETE_BANK_BY_ID: '/delete-by-bank-id'
 }
 
 @Injectable({
@@ -57,6 +58,11 @@ export class PlaidApiService {
 
     return this.http.get<{transactions: Transaction[] ,total_transactions: number,balance:Balance[]}>(url);
 
+  }
+
+  deleteByBankId(bankId: number): Observable<{message: string}> {
+    const url = `${this.apiUrl}${ApiConstants.DELETE_BANK_BY_ID}/${bankId}`;
+    return this.http.delete<{message: string}>(url);
   }
 
 }

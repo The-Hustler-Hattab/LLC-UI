@@ -1,5 +1,4 @@
 import { Component, ViewChild } from '@angular/core';
-import { Column } from '../receipt-files/receipt-files.component';
 import { Reciept } from 'src/app/models/reciept.model';
 import { Table } from 'primeng/table';
 import { RecieptsTableService } from 'src/app/services/table/reciepts-table.service';
@@ -8,6 +7,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { UtilsService } from 'src/app/services/utils.service';
 import { FilesService } from 'src/app/services/azure-blob/files.service';
 import * as FileSaver from 'file-saver';
+import { Column } from 'src/app/models/column.model';
 @Component({
   selector: 'app-reciepts-table',
   templateUrl: './reciepts-table.component.html',
