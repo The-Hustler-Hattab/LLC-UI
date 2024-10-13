@@ -10,7 +10,7 @@
         </li>
 
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" *ngIf="(authService.authState$ | async)?.isAuthenticated">Receipts</a>
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" *ngIf="isAuthenticated()">Receipts</a>
           <div class="dropdown-menu">
             <a class="dropdown-item" routerLink="/reciepts-upload">Process Receipt</a>
             <a class="dropdown-item" routerLink="/reciepts" >Receipt Files</a>
@@ -20,7 +20,7 @@
           </div>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" *ngIf="(authService.authState$ | async)?.isAuthenticated">Income</a>
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" *ngIf="isAuthenticated()">Income</a>
           <div class="dropdown-menu">
             <a class="dropdown-item" routerLink="/income">Income Form</a>
             <a class="dropdown-item" routerLink="/income-table" >Income Table</a>
@@ -36,10 +36,10 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/sheriff-sale" *ngIf="(authService.authState$ | async)?.isAuthenticated">Sheriff Sale</a>
+          <a class="nav-link" routerLinkActive="active" routerLink="/sheriff-sale" *ngIf="isAuthenticated()">Sheriff Sale</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/links" *ngIf="(authService.authState$ | async)?.isAuthenticated">Links</a>
+          <a class="nav-link" routerLinkActive="active" routerLink="/links" *ngIf="isAuthenticated()">Links</a>
         </li>
 
         <li class="nav-item">
@@ -51,11 +51,11 @@
         
           <li class="nav-item ">
               <a class="nav-link "
-              *ngIf="(authService.authState$ | async)?.isAuthenticated" (click)="logout()" style="cursor:pointer">Log out</a>
+              *ngIf="isAuthenticated()" (click)="logout()" style="cursor:pointer">Log out</a>
           </li>
           <li class="nav-item ">
               <a class="nav-link" 
-              *ngIf="!(authService.authState$ | async)?.isAuthenticated" (click)="login()" style="cursor:pointer">Log in</a>
+              *ngIf="!isAuthenticated()" (click)="login()" style="cursor:pointer">Log in</a>
           </li>
 
       </ul>

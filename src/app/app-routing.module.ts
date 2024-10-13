@@ -15,22 +15,23 @@ import { IncomeComponent } from './components/income/income.component';
 import { IncomeTableComponent } from './components/income-table/income-table.component';
 import { PlaidComponent } from './components/plaid/plaid.component';
 import { ManageBankComponent } from './components/manage-bank/manage-bank.component';
+import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   {path:"home", component: HomeComponent},
   {path:"",redirectTo: "home", pathMatch: 'full'},
   {path:"about", component: AboutComponent},
-  {path:"reciepts", component: ReceiptFilesComponent},
-  {path:"reciepts-table", component: RecieptsTableComponent},
-  {path:"reciepts-upload", component: RecieptsUploadComponent},
-  {path:"analytics", component: AnalyticsComponent},
+  {path:"reciepts", component: ReceiptFilesComponent, canActivate: [AuthGuard]},
+  {path:"reciepts-table", component: RecieptsTableComponent,canActivate: [AuthGuard]},
+  {path:"reciepts-upload", component: RecieptsUploadComponent,canActivate: [AuthGuard]},
+  {path:"analytics", component: AnalyticsComponent,canActivate: [AuthGuard]},
   {path:"contact", component: ContactComponent},
-  {path:"links", component: LinksComponent},
-  {path:"sheriff-sale", component: SheriffSaleComponent},
-  {path:"income", component: IncomeComponent},
-  {path:"income-table", component: IncomeTableComponent},
-  {path:"plaid", component: PlaidComponent},
-  {path:"manage-bank", component: ManageBankComponent},
+  {path:"links", component: LinksComponent,canActivate: [AuthGuard]},
+  {path:"sheriff-sale", component: SheriffSaleComponent,canActivate: [AuthGuard]},
+  {path:"income", component: IncomeComponent,canActivate: [AuthGuard]},
+  {path:"income-table", component: IncomeTableComponent,canActivate: [AuthGuard]},
+  {path:"plaid", component: PlaidComponent,canActivate: [AuthGuard]},
+  {path:"manage-bank", component: ManageBankComponent,canActivate: [AuthGuard]},
 
 
   {path: 'callback', component: OktaCallbackComponent},
