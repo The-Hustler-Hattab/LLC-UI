@@ -10,7 +10,7 @@ import { map } from 'rxjs';
 export class AuthService {
 
   isLoggedIn: boolean = false;
-  isAdmin = false;
+  isAdmin: boolean = false;
   constructor(@Inject(OKTA_AUTH) public oktaAuth: OktaAuth
   , public authService: OktaAuthStateService) {
 
@@ -43,7 +43,7 @@ export class AuthService {
         this.isAdmin= false;
       }
     }
-    isUserLoggedIn(){
+    isUserLoggedIn(): boolean {
 
       this.authService.authState$.subscribe((authState) => {
         this.isLoggedIn = authState?.isAuthenticated;
@@ -52,17 +52,13 @@ export class AuthService {
     }
 
     login(){
-
       this.oktaAuth.signInWithRedirect();
       console.log("logged in");
-  
-  
     }
 
   
     logout(){
       this.oktaAuth.signOut();
       console.log("logged out");
-  
     }
 }

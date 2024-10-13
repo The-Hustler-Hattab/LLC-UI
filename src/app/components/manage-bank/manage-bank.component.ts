@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Bank } from 'src/app/models/banks.chart.model';
 import { Column } from 'src/app/models/column.model';
+import { ManageBankService } from 'src/app/services/banks/manage.service';
 import { PlaidApiService } from 'src/app/services/plaid-api.service';
 
 
@@ -21,12 +22,14 @@ export class ManageBankComponent {
   isSubmissionSuccessful: boolean = null;
   submitStatus: string = null;
 
-  constructor(private plaidApi: PlaidApiService ) {}
+  constructor(private plaidApi: PlaidApiService, private manageBankSubject : ManageBankService ) {}
 
   ngOnInit() {
-    this.plaidApi.getAllBanks().subscribe(data => {
-      this.banks = data.banks;
-    });
+    this.banks = this.manageBankSubject.banks
+
+      this.manageBankSubject.bankSubject.subscribe((data: Bank[]) => {
+        this.banks = data;
+      })
 
       
       this.cols = [
@@ -59,10 +62,7 @@ export class ManageBankComponent {
     ;
   }
   refresh() {
-    this.plaidApi.getAllBanks().subscribe(data => {
-      this.banks = data.banks;
-    });
-
+    this.manageBankSubject.getAllBanks();
   }
   clearSubmitStatus() {
     this.submitStatus = null;

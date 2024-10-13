@@ -32,7 +32,7 @@ export class HeaderComponent {
     }
 
     isAuthenticated(): boolean {
-      return this.auth.isLoggedIn;
+      return this.auth.isUserLoggedIn();
     }
  
 

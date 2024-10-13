@@ -1,10 +1,10 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { PlaidOnSuccessArgs } from 'ngx-plaid-link';
 import { PlaidOnExitArgs } from 'ngx-plaid-link';
 import { PlaidOnEventArgs } from 'ngx-plaid-link';
 import { Table } from 'primeng/table';
 import { Account, Balance, Bank, Transaction } from 'src/app/models/banks.chart.model';
+import { ManageBankService } from 'src/app/services/banks/manage.service';
 import { PlaidApiService } from 'src/app/services/plaid-api.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import * as XLSX from 'xlsx';
@@ -19,7 +19,6 @@ export class PlaidComponent implements OnInit {
 
 
   @ViewChild('dt1') dt: Table;  // Reference to the PrimeNG table
-  formGroup: FormGroup | undefined;
   linkToken: string | null = null;
   banks: Bank[] = [];
   selectedBank: Bank | null = null;
@@ -28,34 +27,38 @@ export class PlaidComponent implements OnInit {
   currentBalance: number = 0;
   transactions: Transaction[] = [];
   rangeDates: Date[] | undefined;
-  secondaryRangeDates: Date[] | undefined; // used to verify if the date range has changed
-  bankDetails: {transactions: Transaction[] ,total_transactions: number,balance:Balance[]} = null;
 
   isSubmissionSuccessful: boolean = null;
   submitStatus: string = null;
 
 
-  constructor(private plaidApi: PlaidApiService ) {}
+  constructor(private plaidApi: PlaidApiService,private manageBankService: ManageBankService ) {
+
+  }
 
   ngOnInit() {
-    this.plaidApi.createLinkToken()
-    .subscribe(
-      (data: {link_token: string,expiration: string,request_id: string } ) => {
-      this.linkToken = data.link_token;
-      console.log(this.linkToken);
+    this.linkToken = this.manageBankService.linkToken;
+    this.selectedBank = this.manageBankService.selectedBank;
 
-    });
-    this.plaidApi.getAllBanks().subscribe(
-      data => {
-        this.banks = data.banks;
-        console.log(data);
-      },
-      (error) => {
-        console.error('Error while fetching banks:', error)
-        this.submitStatus = error.error.message;
-        this.isSubmissionSuccessful = false;
-      });
+    this.selectedAccount = this.manageBankService.selectedAccount;
+    this.rangeDates = this.manageBankService.secondaryRangeDates;
+    this.availableBalance = this.manageBankService.availableBalance;
+    this.currentBalance = this.manageBankService.currentBalance;
+    this.transactions = this.manageBankService.transactions;
 
+ 
+
+
+
+    this.banks = this.manageBankService.banks
+
+    this.manageBankService.bankSubject.subscribe((data: Bank[]) => {
+      this.banks = data;
+    })
+
+    this.manageBankService.linkTokenSubject.subscribe((data: string) => {
+      this.linkToken = data;
+    })
   }
 
   onPlaidSuccess($event: PlaidOnSuccessArgs) {
@@ -67,6 +70,7 @@ export class PlaidComponent implements OnInit {
       .subscribe(
         (data: {message: string}) => {
           console.log(data.message);
+          this.refresh()
         },
         (error) => {
           console.error('Error while sending public token:', error)
@@ -90,9 +94,12 @@ export class PlaidComponent implements OnInit {
   onBankSelect(bank: Bank) {
     this.selectedBank = bank;
     this.selectedAccount = null;  // Reset account when bank changes
+    this.manageBankService.selectedBank = this.selectedBank;
+
   }
   onAccountSelect(account: Account) {
     this.selectedAccount = account;
+    this.manageBankService.selectedAccount = account;
   }
 
   fetchAccountDetails() {
@@ -100,10 +107,10 @@ export class PlaidComponent implements OnInit {
     console.log('Fetching account details for Account:', this.selectedAccount);
     console.log('Fetching account details for Bank:', this.selectedBank);
 //  check if the user is using the same date range and bank as before
-    if (this.secondaryRangeDates == this.rangeDates && this.bankDetails != null 
-      && this.bankDetails.balance.some(b => b.account_id == this.selectedAccount.account_id)) {
+    if (this.manageBankService.secondaryRangeDates == this.rangeDates && this.manageBankService.bankDetails != null 
+      && this.manageBankService.bankDetails.balance.some(b => b.account_id == this.selectedAccount.account_id)) {
       console.log('Using cached data');
-      this.populateBankDetails(this.bankDetails);
+      this.populateBankDetails(this.manageBankService.bankDetails);
 
       
     } else {
@@ -113,8 +120,8 @@ export class PlaidComponent implements OnInit {
       this.plaidApi.getTransactions(this.selectedBank.id, date[0], date[1])
       .subscribe(data  => {
         // set data to verify if the date range has changed later
-        this.secondaryRangeDates = this.rangeDates;
-        this.bankDetails = data;
+        this.manageBankService.secondaryRangeDates = this.rangeDates;
+        this.manageBankService.bankDetails = data;
 
         console.log(data);
         this.populateBankDetails(data);
@@ -134,10 +141,13 @@ export class PlaidComponent implements OnInit {
     console.log('Data:', data.balance);
     const balance: Balance = data.balance.filter(b => b.account_id == this.selectedAccount.account_id)[0];
     this.availableBalance = balance.balances_available;
+    this.manageBankService.availableBalance = this.availableBalance;
     this.currentBalance = balance.balances_current;
+    this.manageBankService.currentBalance = this.currentBalance;
     console.log('Available Balance:', this.availableBalance);
     console.log('Current Balance:', this.currentBalance);
     this.transactions = data.transactions.filter(t => t.account_id == this.selectedAccount.account_id);
+    this.manageBankService.transactions = this.transactions;
     console.log('Transactions:', this.transactions);
   }
 
@@ -171,16 +181,7 @@ exportExcel() {
 }
 
     refresh() {
-      this.plaidApi.getAllBanks().subscribe(
-        data => {
-          this.banks = data.banks;
-          console.log(data);
-        },
-        (error) => {
-          console.error('Error while refreshing:', error)
-          this.submitStatus = error.error.message;
-          this.isSubmissionSuccessful = false;
-        });
+      this.manageBankService.setup();
     }
 
 
