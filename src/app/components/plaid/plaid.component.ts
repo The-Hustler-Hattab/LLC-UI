@@ -20,9 +20,7 @@ export class PlaidComponent implements OnInit {
 
   @ViewChild('dt1') dt: Table;  // Reference to the PrimeNG table
   formGroup: FormGroup | undefined;
-
   linkToken: string | null = null;
-
   banks: Bank[] = [];
   selectedBank: Bank | null = null;
   selectedAccount: Account | null = null;
@@ -31,9 +29,11 @@ export class PlaidComponent implements OnInit {
   transactions: Transaction[] = [];
   rangeDates: Date[] | undefined;
   secondaryRangeDates: Date[] | undefined; // used to verify if the date range has changed
-
-
   bankDetails: {transactions: Transaction[] ,total_transactions: number,balance:Balance[]} = null;
+
+  isSubmissionSuccessful: boolean = null;
+  submitStatus: string = null;
+
 
   constructor(private plaidApi: PlaidApiService ) {}
 
@@ -49,6 +49,11 @@ export class PlaidComponent implements OnInit {
       data => {
         this.banks = data.banks;
         console.log(data);
+      },
+      (error) => {
+        console.error('Error while fetching banks:', error)
+        this.submitStatus = error.error.message;
+        this.isSubmissionSuccessful = false;
       });
 
   }
@@ -62,6 +67,11 @@ export class PlaidComponent implements OnInit {
       .subscribe(
         (data: {message: string}) => {
           console.log(data.message);
+        },
+        (error) => {
+          console.error('Error while sending public token:', error)
+          this.submitStatus = error.error.message;
+          this.isSubmissionSuccessful = false;
         }
     )
   }
@@ -109,6 +119,11 @@ export class PlaidComponent implements OnInit {
         console.log(data);
         this.populateBankDetails(data);
   
+      },
+      (error) => {
+        console.error('Error while fetching transactions:', error)
+        this.submitStatus = error.error.message;
+        this.isSubmissionSuccessful = false;
       })
     }
 
@@ -160,6 +175,11 @@ exportExcel() {
         data => {
           this.banks = data.banks;
           console.log(data);
+        },
+        (error) => {
+          console.error('Error while refreshing:', error)
+          this.submitStatus = error.error.message;
+          this.isSubmissionSuccessful = false;
         });
     }
 
@@ -178,5 +198,9 @@ exportExcel() {
         return false
       }
 
+    }
+    clearSubmitStatus() {
+      this.submitStatus = null;
+      this.isSubmissionSuccessful = null;
     }
 }
