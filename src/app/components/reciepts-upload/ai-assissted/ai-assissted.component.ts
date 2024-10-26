@@ -18,8 +18,8 @@ export class AiAssisstedComponent {
   uploaded: boolean = false;
   
   formData: any;
-  users: string[] = ConstantsService.COMPANY_MEMBERS;
-  companies: string[] = ConstantsService.COMPANIES;
+  users: string[] = ConstantsService.HATTAB_LLC_COMPANY_MEMBERS;
+  companies: string[] = ConstantsService.EXPENSE_CATEGORY;
   spendTypes: string[] = ConstantsService.SPEND_TYPE;
 
   date: Date | undefined;
