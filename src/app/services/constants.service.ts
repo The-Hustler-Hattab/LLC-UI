@@ -16,8 +16,11 @@ export class ConstantsService {
     {name:'Plumber' }, 
     {name: 'Electrician' }, {name: 'HVAC' },{name:'Boiler' },{name:'Pest Control' },
      {name:'Carpenter' }, {name: 'Foundation' },{name:'Deck Builder' }, {name: 'Roofer' },
-     {name: 'Painter' }, {name: 'Flooring' }, {name: 'Concrete' },{name:'Demolishing' }, {name: 'Masonry' },
-     {name:'Landscaping' }, {name: 'General Contractor' }, {name: 'Other' }];
+     {name: 'Painter' }, {name: 'Flooring' },{name: 'Carpet' },{name: 'Paving' }, {name: 'Concrete' },{name:'Demolishing' }, {name: 'Masonry' },
+     {name:'Landscaping' }, {name: 'General Contractor' }, {name: 'Other' }
+    
+    
+    ];
 
 
 
