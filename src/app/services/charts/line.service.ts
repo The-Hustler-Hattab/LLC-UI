@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { ReceiptService } from '../receipt.service';
+import { ReceiptService } from '../reciepts/reciepts-api/receipt.service';
 import { UtilsService } from '../utils.service';
-import { LineHorizantalChartData, LineHorizantalChartDataItem } from 'src/app/models/line.chart.model';
+import { LineHorizantalChartData, LineHorizantalChartDataItem } from 'src/app/models/charts/line.chart.model';
 
 @Injectable({
   providedIn: 'root',

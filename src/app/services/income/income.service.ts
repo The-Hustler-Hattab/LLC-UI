@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { IncomeApiServiceService } from '../income-api-service.service';
+import { IncomeApiServiceService } from './incomeAPI/income-api-service.service';
 import { Subject } from 'rxjs';
-import { LLCIncome } from 'src/app/models/llc-income.model';
+import { LLCIncome } from 'src/app/models/income/llc-income.model';
 import { FilesService } from '../azure-blob/files.service';
 
 @Injectable({

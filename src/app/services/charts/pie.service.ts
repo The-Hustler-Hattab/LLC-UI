@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ReceiptService } from '../receipt.service';
+import { ReceiptService } from '../reciepts/reciepts-api/receipt.service';
 import { Subject } from 'rxjs';
-import { PieChartDataItem, PieData } from 'src/app/models/pie.chart.model';
+import { PieChartDataItem, PieData } from 'src/app/models/charts/pie.chart.model';
 import { UtilsService } from '../utils.service';
 
 @Injectable({

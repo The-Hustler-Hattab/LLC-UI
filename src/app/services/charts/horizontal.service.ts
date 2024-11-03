@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { LineHorizantalChartData } from 'src/app/models/line.chart.model';
-import { ReceiptService } from '../receipt.service';
+import { LineHorizantalChartData } from 'src/app/models/charts/line.chart.model';
+import { ReceiptService } from '../reciepts/reciepts-api/receipt.service';
 import { UtilsService } from '../utils.service';
 
 @Injectable({

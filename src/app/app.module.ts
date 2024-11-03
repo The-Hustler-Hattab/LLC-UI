@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -94,7 +93,6 @@ import { TimelineModule } from 'primeng/timeline';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { FloatLabelModule } from 'primeng/floatlabel';
-
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { ToolbarModule } from 'primeng/toolbar';
 import { TooltipModule } from 'primeng/tooltip';
@@ -110,16 +108,12 @@ import { RippleModule } from 'primeng/ripple';
 import { StyleClassModule } from 'primeng/styleclass';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { ReceiptFilesComponent } from './components/receipt-files/receipt-files.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { ResultBoxComponent } from './components/result-box/result-box.component';
-import { RecieptsUploadComponent } from './components/reciepts-upload/reciepts-upload.component';
 import { ProjectInterceptor } from './interceptor/project.interceptor';
-import { RecieptsTableComponent } from './components/reciepts-table/reciepts-table.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatButtonModule } from '@angular/material/button';
-
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatListModule} from '@angular/material/list';
@@ -131,22 +125,24 @@ import { PieChartComponent } from './components/analytics/pie-chart/pie-chart.co
 import { LineChartComponent } from './components/analytics/line-chart/line-chart.component';
 import { HorizontalChartComponent } from './components/analytics/horizontal-chart/horizontal-chart.component';
 import { CommonModule, DatePipe } from '@angular/common';
-import { FullAiComponent } from './components/reciepts-upload/full-ai/full-ai.component';
-import { AiAssisstedComponent } from './components/reciepts-upload/ai-assissted/ai-assissted.component';
 import { OKTA_CONFIG, OktaAuthModule } from '@okta/okta-angular';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { OktaAuth } from '@okta/okta-auth-js';
 import { LinksComponent } from './components/links/links.component';
 import { RowExpandTableComponent } from './components/sheriff-sale/row-expand-table/row-expand-table.component';
 import { SheriffSaleComponent } from './components/sheriff-sale/sheriff-sale.component';
-import { IncomeComponent } from './components/income/income.component';
-import { IncomeTableComponent } from './components/income-table/income-table.component';
+import { IncomeComponent } from './components/income/income-form/income.component';
+import { IncomeTableComponent } from './components/income/income-table/income-table.component';
 import { InputIconModule } from 'primeng/inputicon';
 import { IconFieldModule } from 'primeng/iconfield';
-
 import { NgxPlaidLinkModule } from "ngx-plaid-link";
-import { PlaidComponent } from './components/plaid/plaid.component';
-import { ManageBankComponent } from './components/manage-bank/manage-bank.component';
+import { PlaidComponent } from './components/plaid-banks/plaid/plaid.component';
+import { ManageBankComponent } from './components/plaid-banks/manage-bank/manage-bank.component';
+import { ContractorsFormComponent } from './components/contractors/contractors-form/contractors-form.component';
+import { ReceiptFilesComponent } from './components/reciepts/receipt-files/receipt-files.component';
+import { RecieptsTableComponent } from './components/reciepts/reciepts-table/reciepts-table.component';
+import { AiAssisstedComponent } from './components/reciepts/reciepts-upload/ai-assissted/ai-assissted.component';
+import { RecieptsUploadComponent } from './components/reciepts/reciepts-upload/reciepts-upload.component';
 
 
 
@@ -183,7 +179,6 @@ const oktaAuth = new OktaAuth(oktaConfig);
     PieChartComponent,
     LineChartComponent,
     HorizontalChartComponent,
-    FullAiComponent,
     AiAssisstedComponent,
     LinksComponent,
     RowExpandTableComponent,
@@ -191,7 +186,8 @@ const oktaAuth = new OktaAuth(oktaConfig);
     IncomeComponent,
     IncomeTableComponent,
     PlaidComponent,
-    ManageBankComponent
+    ManageBankComponent,
+    ContractorsFormComponent
 
     
 

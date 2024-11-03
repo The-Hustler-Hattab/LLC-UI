@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TreeNode } from 'primeng/api';
-import { ReceiptService } from '../receipt.service';
+import { ReceiptService } from '../reciepts/reciepts-api/receipt.service';
 import { Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'

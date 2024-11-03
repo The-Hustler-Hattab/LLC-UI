@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ReceiptService } from '../receipt.service';
-import { BarChartData, BarChartModel, BarChartModelItem, BarChartDataSet } from 'src/app/models/bar.chart.model';
+import { ReceiptService } from '../reciepts/reciepts-api/receipt.service';
+import { BarChartData, BarChartModel, BarChartModelItem, BarChartDataSet } from 'src/app/models/charts/bar.chart.model';
 import { UtilsService } from '../utils.service';
 import { Subject } from 'rxjs';
 import { Chart } from 'chart.js/dist';

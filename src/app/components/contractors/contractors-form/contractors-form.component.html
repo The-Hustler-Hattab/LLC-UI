@@ -1,0 +1,85 @@
+<div class="container mt-5">
+    <h1>Contractor Form</h1>
+    <form (ngSubmit)="onSubmits(form)" #form="ngForm">
+      
+
+
+      <!-- Income Amount Field -->
+      <div class="mb-3">
+        <label for="contractorName" class="form-label">Contractor Name*</label>
+        <input type="text" class="form-control" id="contractorName" name="contractorName" ngModel placeholder="Enter Name" required>
+      </div>
+      <div class="mb-3">
+        <label for="specialties" class="form-label">Specialty*</label>
+        
+        <div class="w-100">
+          <p-multiSelect 
+            class="form-label" 
+            [options]="specialties" 
+            [(ngModel)]="selectedSpecialties" 
+            name="specialties"
+            optionLabel="name" 
+            placeholder="Select Specialties"
+            display="chip" 
+            [showClear]="true"
+            >
+          </p-multiSelect>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="cost" class="form-label">Job Cost</label>
+        <input 
+          type="text" 
+          class="form-control" 
+          id="cost" 
+          name="cost" 
+          ngModel 
+          placeholder="Enter amount" 
+          required 
+          (input)="formatJobCost($event)">
+      </div>
+
+      <div class="mb-3">
+        <label for="phoneNumber" class="form-label">Phone Number*</label>
+        <input 
+          type="text" 
+          class="form-control" 
+          id="phoneNumber" 
+          name="phoneNumber" 
+          ngModel 
+          placeholder="Enter Phone Number" 
+          required
+          pattern="\\d{3}-\\d{3}-\\d{4}" 
+          (input)="formatPhoneNumber($event)">
+        <small class="form-text text-muted">Format: 412-456-7890</small>
+      </div>
+      
+     
+      <!-- Comment Field -->
+      <div class="mb-3">
+        <label for="comment" class="form-label">Comment</label>
+        <textarea class="form-control" id="comment" name="comment" ngModel rows="3" placeholder="Add any additional details"></textarea>
+      </div>
+  
+      <!-- Proof File Field (Optional) -->
+      <div class="mb-3">
+        <label for="quote" class="form-label">Quote</label>
+        <input type="file" class="form-control" id="quote" name="quote" ngModel
+          (change)="onFilesSelected($event)"
+        >
+      </div>
+  
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary" 
+      [disabled]="isValid(form)"
+      >Submit</button>
+    </form>
+
+
+  </div>
+  <app-result-box
+  [isSuccessful]="isSubmissionSuccessful"
+  [message]="submitStatus"
+  (closed)="clearSubmitStatus()"
+></app-result-box>

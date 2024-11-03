@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SheriffSaleApiService } from '../sheriff-sale-api.service';
+import { SheriffSaleApiService } from './sherif-sale-api/sheriff-sale-api.service';
 import { MasterSherifSale } from 'src/app/models/sheriff-sale/master.model';
 import { Subject } from 'rxjs/internal/Subject';
 import { UtilsService } from '../utils.service';

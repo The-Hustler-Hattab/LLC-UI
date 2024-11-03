@@ -1,5 +1,5 @@
 
-export interface Reciept {
+export interface Receipt {
     company_name: string;
     created_at: string;
     created_by: string;
