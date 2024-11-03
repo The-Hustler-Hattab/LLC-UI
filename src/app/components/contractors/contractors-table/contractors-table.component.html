@@ -93,7 +93,7 @@
           </td>
   
           <td>
-            <button
+            <button *ngIf="rowData.quote_file_location" 
               type="button"
               class="btn btn-success"
               (click)="download(rowData)"
