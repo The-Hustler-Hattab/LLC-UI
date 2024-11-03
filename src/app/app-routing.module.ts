@@ -36,10 +36,10 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {path:"contractor-table", component: ContractorsTableComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
 
-  
+
   {path:"plaid", component: PlaidComponent,canActivate: [AuthGuard]},
   {path:"manage-bank", component: ManageBankComponent,canActivate: [AuthGuard]},
 
