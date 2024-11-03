@@ -1,0 +1,122 @@
+<div class="container">
+    <p-table
+      #dt1
+      [value]="contractorsTable"
+      dataKey="id"
+      [showCurrentPageReport]="true"
+      [tableStyle]="{ 'min-width': '60rem' }"
+      [paginator]="true"
+      [rows]="50"
+      [rowsPerPageOptions]="[5, 10, 20, 50, 100, 500, 1000]"
+      [globalFilterFields]="[
+        'id',
+        'contractor_name',
+        'contractor_skill',
+        'phone_number',
+        'job_cost',
+        'comment',
+        'quote_file_location',
+        'created_at',
+        'created_by'
+      ]"
+      selectionMode="single"
+      [scrollable]="true"
+      [resizableColumns]="true"
+      columnResizeMode="expand"
+      [reorderableColumns]="true"
+      [columns]="cols"
+      styleClass="p-datatable-gridlines"
+    >
+      <ng-template pTemplate="caption">
+        <div class="row">
+          <div class="col-md-3">
+            <mat-form-field>
+              <mat-label>Filter</mat-label>
+              <div class="row">
+                <div class="col-md-10">
+                  <input
+                    matInput
+                    (input)="applyFilterGlobal($event, 'contains')"
+                    placeholder="Ex. ium"
+                    #input
+                  />
+                </div>
+                <div class="col-md-1">
+                  <mat-icon svgIcon="filter"></mat-icon>
+                </div>
+              </div>
+            </mat-form-field>
+          </div>
+  
+          <div class="col-md-1">
+            <button
+              type="button"
+              class="btn btn-success mr-2"
+              (click)="exportExcel()"
+            >
+              <i class="fas fa-file-excel"></i> XLSX
+            </button>
+          </div>
+  
+          <div class="col-md-2">
+            <button mat-fab extended color="primary" id="" (click)="refresh()">
+              <i class="fas fa-sync-alt"></i> Refresh
+            </button>
+          </div>
+        </div>
+      </ng-template>
+  
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th
+            style="width: 20%"
+            *ngFor="let col of columns"
+            pReorderableColumn
+            [pSortableColumn]="col.field"
+          >
+            {{ col.header }}
+            <p-sortIcon (field)="(col.header)"></p-sortIcon>
+          </th>
+          <th style="width: 20%">Operations</th>
+        </tr>
+      </ng-template>
+      <ng-template
+        pTemplate="body"
+        let-log
+        let-index="rowIndex"
+        let-columns="columns"
+        let-rowData
+      >
+        <tr [pReorderableRow]="index" [pSelectableRow]="log">
+          <td *ngFor="let col of columns">
+            {{ rowData[col.field] }}
+          </td>
+  
+          <td>
+            <button
+              type="button"
+              class="btn btn-success"
+              (click)="download(rowData)"
+            >
+              <i class="fas fa-eye"></i>
+            </button>
+  
+            <button
+              type="button"
+              class="btn btn-danger"
+              (click)="deleteLog(rowData)"
+            >
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  
+  <app-result-box
+    [isSuccessful]="isSubmissionSuccessful"
+    [message]="submitStatus"
+    (closed)="clearSubmitStatus()"
+  ></app-result-box>
+  

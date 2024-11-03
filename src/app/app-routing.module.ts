@@ -17,6 +17,7 @@ import { ContractorsFormComponent } from './components/contractors/contractors-f
 import { ReceiptFilesComponent } from './components/reciepts/receipt-files/receipt-files.component';
 import { RecieptsTableComponent } from './components/reciepts/reciepts-table/reciepts-table.component';
 import { RecieptsUploadComponent } from './components/reciepts/reciepts-upload/reciepts-upload.component';
+import { ContractorsTableComponent } from './components/contractors/contractors-table/contractors-table.component';
 
 const routes: Routes = [
   {path:"home", component: HomeComponent},
@@ -32,9 +33,13 @@ const routes: Routes = [
   {path:"income", component: IncomeComponent,canActivate: [AuthGuard]},
   {path:"income-table", component: IncomeTableComponent,canActivate: [AuthGuard]},
   {path:"contractor-form", component: ContractorsFormComponent,
+    canActivate: [AuthGuard]
+  },
+  {path:"contractor-table", component: ContractorsTableComponent,
     // canActivate: [AuthGuard]
   },
 
+  
   {path:"plaid", component: PlaidComponent,canActivate: [AuthGuard]},
   {path:"manage-bank", component: ManageBankComponent,canActivate: [AuthGuard]},
 

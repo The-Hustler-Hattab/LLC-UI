@@ -143,6 +143,7 @@ import { ReceiptFilesComponent } from './components/reciepts/receipt-files/recei
 import { RecieptsTableComponent } from './components/reciepts/reciepts-table/reciepts-table.component';
 import { AiAssisstedComponent } from './components/reciepts/reciepts-upload/ai-assissted/ai-assissted.component';
 import { RecieptsUploadComponent } from './components/reciepts/reciepts-upload/reciepts-upload.component';
+import { ContractorsTableComponent } from './components/contractors/contractors-table/contractors-table.component';
 
 
 
@@ -187,7 +188,8 @@ const oktaAuth = new OktaAuth(oktaConfig);
     IncomeTableComponent,
     PlaidComponent,
     ManageBankComponent,
-    ContractorsFormComponent
+    ContractorsFormComponent,
+    ContractorsTableComponent
 
     
 
