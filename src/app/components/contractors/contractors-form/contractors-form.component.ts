@@ -18,7 +18,7 @@ export class ContractorsFormComponent  implements OnInit {
   specialties: ContractorSpecialty[] = ConstantsService.CONTRACTORS_SPECIALTIES
 
   selectedSpecialties: ContractorSpecialty[] = [];
-
+  selectedCost: string
   constructor(private contractorApiService: ContractorApiService) { }
 
   ngOnInit(): void {
@@ -46,8 +46,11 @@ export class ContractorsFormComponent  implements OnInit {
     if (value) {
       value = parseInt(value, 10).toLocaleString('en-US');
       input.value = `$${value}`;
+      this.selectedCost = input.value
+
     }
   }
+ 
 
   clearSubmitStatus() {
     this.submitStatus = null;
@@ -67,7 +70,7 @@ export class ContractorsFormComponent  implements OnInit {
     const skills = this.selectedSpecialties.map(specialty => specialty.name).join(', ');
     console.log("skills: ", skills);
     this.contractorApiService.saveContractor(form.value.contractorName,
-       form.value.cost, skills, form.value.comment,
+       this.selectedCost, skills, form.value.comment,
         form.value.phoneNumber, this.selectedFile).subscribe( 
               (data: {message: string}) => {
           console.log(JSON.stringify(data.message));
