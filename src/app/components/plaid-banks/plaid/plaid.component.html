@@ -114,92 +114,95 @@
     </div>
     <!-- Transaction Table with Sorting, Pagination, Search, and Export -->
     <div class="col-md-12">
-      <p-table
-        #dt1
-        [value]="transactions"
-        [paginator]="true"
-        [rows]="20"
-        [rowsPerPageOptions]="[10, 20, 50, 100, 500, 1000]"
-        [globalFilterFields]="['date', 'name']"
-      >
-        <ng-template pTemplate="caption">
-          <div class="row">
-            <div class="col-md-3">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="search-addon">
-                    <i class="pi pi-search"></i>
-                  </span>
+      <div class="table-responsive" style="overflow-x:auto;">
+        <p-table
+          #dt1
+          [value]="transactions"
+          [paginator]="true"
+          [rows]="20"
+          [rowsPerPageOptions]="[10, 20, 50, 100, 500, 1000]"
+          [globalFilterFields]="['date', 'name']"
+          [ngStyle]="{'min-width': '1000px'}"
+        >
+          <ng-template pTemplate="caption">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="search-addon">
+                      <i class="pi pi-search"></i>
+                    </span>
+                  </div>
+                  <input
+                    #globalFilterInput
+                    type="text"
+                    class="form-control"
+                    placeholder="Global Search"
+                    aria-label="Search"
+                    aria-describedby="search-addon"
+                    (input)="
+                      dt1.filterGlobal(globalFilterInput.value, 'contains')
+                    "
+                  />
                 </div>
-                <input
-                  #globalFilterInput
-                  type="text"
-                  class="form-control"
-                  placeholder="Global Search"
-                  aria-label="Search"
-                  aria-describedby="search-addon"
-                  (input)="
-                    dt1.filterGlobal(globalFilterInput.value, 'contains')
-                  "
-                />
+              </div>
+              <div class="col-md-3">
+                <button
+                  type="button"
+                  class="btn btn-success"
+                  (click)="exportExcel()"
+                >
+                  <i class="fas fa-file-excel"></i>
+                </button>
               </div>
             </div>
-            <div class="col-md-3">
-              <button
-                type="button"
-                class="btn btn-success"
-                (click)="exportExcel()"
-              >
-                <i class="fas fa-file-excel"></i>
-              </button>
-            </div>
-          </div>
-        </ng-template>
-        <ng-template pTemplate="header">
-          <tr>
-            <th pSortableColumn="date">
-              Date <p-sortIcon field="date"></p-sortIcon>
-            </th>
-            <th pSortableColumn="authorized_date">
-              Authorized Date <p-sortIcon field="authorized_date"></p-sortIcon>
-            </th>
-            <th pSortableColumn="name">
-              Name <p-sortIcon field="name"></p-sortIcon>
-            </th>
-            <th pSortableColumn="merchant_name">
-              Merchant Name <p-sortIcon field="merchant_name"></p-sortIcon>
-            </th>
-            <th pSortableColumn="amount">
-              Amount <p-sortIcon field="amount"></p-sortIcon>
-            </th>
-            <th pSortableColumn="payment_channel">
-              Payment Channel <p-sortIcon field="payment_channel"></p-sortIcon>
-            </th>
-            <th pSortableColumn="pending">
-              Pending <p-sortIcon field="pending"></p-sortIcon>
-            </th>
-            <th pSortableColumn="website">
-              Website <p-sortIcon field="website"></p-sortIcon>
-            </th>
-          </tr>
-        </ng-template>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="date" style="min-width: 150px;">
+                Date <p-sortIcon field="date"></p-sortIcon>
+              </th>
+              <th pSortableColumn="authorized_date" style="min-width: 200px;">
+                Authorized Date <p-sortIcon field="authorized_date"></p-sortIcon>
+              </th>
+              <th pSortableColumn="name" style="min-width: 500px;">
+                Name <p-sortIcon field="name"></p-sortIcon>
+              </th>
+              <th pSortableColumn="merchant_name" style="min-width: 200px;">
+                Merchant Name <p-sortIcon field="merchant_name"></p-sortIcon>
+              </th>
+              <th pSortableColumn="amount" style="min-width: 150px;">
+                Amount <p-sortIcon field="amount"></p-sortIcon>
+              </th>
+              <th pSortableColumn="payment_channel" style="min-width: 150px;">
+                Payment Channel <p-sortIcon field="payment_channel"></p-sortIcon>
+              </th>
+              <th pSortableColumn="pending" style="min-width: 100px;">
+                Pending <p-sortIcon field="pending"></p-sortIcon>
+              </th>
+              <th pSortableColumn="website" style="min-width: 200px;">
+                Website <p-sortIcon field="website"></p-sortIcon>
+              </th>
+            </tr>
+          </ng-template>
 
-        <ng-template pTemplate="body" let-transaction>
-          <tr>
-            <td>{{ transaction.date }}</td>
-            <td>{{ transaction.authorized_date }}</td>
+          <ng-template pTemplate="body" let-transaction>
+            <tr>
+              <td>{{ transaction.date }}</td>
+              <td>{{ transaction.authorized_date }}</td>
 
-            <td>{{ transaction.name }}</td>
-            <td>{{ transaction.merchant_name }}</td>
+              <td>{{ transaction.name }}</td>
+              <td>{{ transaction.merchant_name }}</td>
 
-            <td>{{ transaction.amount | currency }}</td>
-            <td>{{ transaction.payment_channel }}</td>
-            <td>{{ transaction.pending }}</td>
-            <td>{{ transaction.website }}</td>
+              <td>{{ transaction.amount | currency }}</td>
+              <td>{{ transaction.payment_channel }}</td>
+              <td>{{ transaction.pending }}</td>
+              <td>{{ transaction.website }}</td>
 
-          </tr>
-        </ng-template>
-      </p-table>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
     </div>
   </div>
 </div>
