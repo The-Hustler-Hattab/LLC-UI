@@ -15,4 +15,5 @@ export interface Receipt {
     vendor_address: string;
     spend_type: string;
     sha256: string;
+    description: string | null;
   }

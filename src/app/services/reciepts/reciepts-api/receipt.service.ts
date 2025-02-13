@@ -100,8 +100,9 @@ export class ReceiptService {
   }
 
   storeReceiptsAIAssissted(file: File,total:number,sub_total:number,tax:number,company_name: string,
-    vendor:string,purchased_at:string,vendor_address:string,customer_name:string,invoice_id:string,spend_type:string
-    ,sha256:string
+    vendor:string,purchased_at:string,vendor_address:string,customer_name:string,
+    invoice_id:string,spend_type:string
+    ,sha256:string,description:string
   ): Observable<{message: string}> {
     console.log("date: "+purchased_at);
     
@@ -118,6 +119,7 @@ export class ReceiptService {
     formData.append('invoice_id',invoice_id);
     formData.append('spend_type',spend_type); 
     formData.append('sha256',sha256);
+    formData.append('description',description);
 
     const url = `${this.apiUrl}${ApiConstants.POST_STORE_RECIPTS_AI_ASSISSTED}`;
 

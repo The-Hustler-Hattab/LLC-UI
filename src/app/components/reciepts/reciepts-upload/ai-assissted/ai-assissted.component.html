@@ -124,6 +124,15 @@
     name="invoiceId"
     class="form-control"
   />
+  <label for="description" class="form-label">Description:</label>
+  <textarea
+    id="description"
+    [(ngModel)]="formData.description"
+    name="description"
+    class="form-control"
+    rows="3"
+    maxlength="500"
+  ></textarea>
   <label for="sha256" class="form-label" hidden>SHA 256</label>
   <input
     type="text"
