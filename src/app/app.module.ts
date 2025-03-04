@@ -154,8 +154,8 @@ import { ContractorsTableComponent } from './components/contractors/contractors-
 
 
 const oktaConfig = {
-  issuer: 'https://dev-54597357.okta.com/oauth2/default',
-  clientId: '0oah3i1pl3DeOXeIi5d7',
+  issuer: 'https://dev-48475088.okta.com/oauth2/default',
+  clientId: '0oannmoqtzaH3CkOm5d7',
   redirectUri: '/callback',
   scopes: ['openid', 'profile', 'email','LLC-ROLE']
 };
